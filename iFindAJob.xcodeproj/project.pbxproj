@@ -16,6 +16,15 @@
 		F556629D183A5E1A008FAA06 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F556629C183A5E1A008FAA06 /* Default.png */; };
 		F556629F183A5E1A008FAA06 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F556629E183A5E1A008FAA06 /* Default@2x.png */; };
 		F55662A1183A5E1A008FAA06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F55662A0183A5E1A008FAA06 /* Default-568h@2x.png */; };
+		F55662A8183A5E6D008FAA06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55662A7183A5E6D008FAA06 /* CoreData.framework */; };
+		F55662AA183A5E75008FAA06 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55662A9183A5E75008FAA06 /* Social.framework */; };
+		F55662AF183A5EDD008FAA06 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662AD183A5EDD008FAA06 /* MainViewController.m */; };
+		F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662AE183A5EDD008FAA06 /* MainViewController.xib */; };
+		F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662B2183A5EFA008FAA06 /* SearchViewController.m */; };
+		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
+		F55662B9183A5F0A008FAA06 /* DataSourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */; };
+		F55662BA183A5F0A008FAA06 /* DataSourcesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */; };
+		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +41,19 @@
 		F556629C183A5E1A008FAA06 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F556629E183A5E1A008FAA06 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F55662A0183A5E1A008FAA06 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F55662A7183A5E6D008FAA06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F55662A9183A5E75008FAA06 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		F55662AC183A5EDD008FAA06 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F55662AD183A5EDD008FAA06 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F55662AE183A5EDD008FAA06 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		F55662B1183A5EFA008FAA06 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		F55662B2183A5EFA008FAA06 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		F55662B3183A5EFA008FAA06 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		F55662B6183A5F0A008FAA06 /* DataSourcesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourcesViewController.h; sourceTree = "<group>"; };
+		F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourcesViewController.m; sourceTree = "<group>"; };
+		F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataSourcesViewController.xib; sourceTree = "<group>"; };
+		F55662BC183A5F33008FAA06 /* ExtraMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraMethods.h; sourceTree = "<group>"; };
+		F55662BD183A5F33008FAA06 /* ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraMethods.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55662AA183A5E75008FAA06 /* Social.framework in Frameworks */,
+				F55662A8183A5E6D008FAA06 /* CoreData.framework in Frameworks */,
 				F556628B183A5E1A008FAA06 /* UIKit.framework in Frameworks */,
 				F556628D183A5E1A008FAA06 /* Foundation.framework in Frameworks */,
 				F556628F183A5E1A008FAA06 /* CoreGraphics.framework in Frameworks */,
@@ -68,6 +92,8 @@
 		F5566289183A5E1A008FAA06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F55662A7183A5E6D008FAA06 /* CoreData.framework */,
+				F55662A9183A5E75008FAA06 /* Social.framework */,
 				F556628A183A5E1A008FAA06 /* UIKit.framework */,
 				F556628C183A5E1A008FAA06 /* Foundation.framework */,
 				F556628E183A5E1A008FAA06 /* CoreGraphics.framework */,
@@ -78,6 +104,8 @@
 		F5566290183A5E1A008FAA06 /* iFindAJob */ = {
 			isa = PBXGroup;
 			children = (
+				F55662BB183A5F1E008FAA06 /* Includes */,
+				F55662AB183A5E88008FAA06 /* Views */,
 				F5566299183A5E1A008FAA06 /* AppDelegate.h */,
 				F556629A183A5E1A008FAA06 /* AppDelegate.m */,
 				F5566291183A5E1A008FAA06 /* Supporting Files */,
@@ -97,6 +125,31 @@
 				F55662A0183A5E1A008FAA06 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F55662AB183A5E88008FAA06 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F55662AC183A5EDD008FAA06 /* MainViewController.h */,
+				F55662AD183A5EDD008FAA06 /* MainViewController.m */,
+				F55662AE183A5EDD008FAA06 /* MainViewController.xib */,
+				F55662B1183A5EFA008FAA06 /* SearchViewController.h */,
+				F55662B2183A5EFA008FAA06 /* SearchViewController.m */,
+				F55662B3183A5EFA008FAA06 /* SearchViewController.xib */,
+				F55662B6183A5F0A008FAA06 /* DataSourcesViewController.h */,
+				F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */,
+				F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F55662BB183A5F1E008FAA06 /* Includes */ = {
+			isa = PBXGroup;
+			children = (
+				F55662BC183A5F33008FAA06 /* ExtraMethods.h */,
+				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
+			);
+			name = Includes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +207,9 @@
 				F556629D183A5E1A008FAA06 /* Default.png in Resources */,
 				F556629F183A5E1A008FAA06 /* Default@2x.png in Resources */,
 				F55662A1183A5E1A008FAA06 /* Default-568h@2x.png in Resources */,
+				F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */,
+				F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */,
+				F55662BA183A5F0A008FAA06 /* DataSourcesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +222,10 @@
 			files = (
 				F5566297183A5E1A008FAA06 /* main.m in Sources */,
 				F556629B183A5E1A008FAA06 /* AppDelegate.m in Sources */,
+				F55662AF183A5EDD008FAA06 /* MainViewController.m in Sources */,
+				F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */,
+				F55662B9183A5F0A008FAA06 /* DataSourcesViewController.m in Sources */,
+				F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

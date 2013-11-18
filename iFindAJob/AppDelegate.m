@@ -12,8 +12,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Required core --
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
+    // Begin custom code --
+    // Navigation controllers --
+    MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainVC, searchVC, nil];
+    
+    // Tab controller
+    self.tabController = [[UITabBarController alloc] init];
+    [self.tabController setViewControllers:allViewControllers animated:YES];
+    self.window.rootViewController = self.tabController;
+    // End custom code --
+    
+    // Required code --
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
