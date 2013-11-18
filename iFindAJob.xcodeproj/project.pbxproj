@@ -104,6 +104,7 @@
 		F5566290183A5E1A008FAA06 /* iFindAJob */ = {
 			isa = PBXGroup;
 			children = (
+				F55662BF183A7C2B008FAA06 /* Web Services */,
 				F55662BB183A5F1E008FAA06 /* Includes */,
 				F55662AB183A5E88008FAA06 /* Views */,
 				F5566299183A5E1A008FAA06 /* AppDelegate.h */,
@@ -150,6 +151,13 @@
 				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
 			);
 			name = Includes;
+			sourceTree = "<group>";
+		};
+		F55662BF183A7C2B008FAA06 /* Web Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Web Services";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +348,7 @@
 				F55662A6183A5E1A008FAA06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

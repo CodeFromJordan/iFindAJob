@@ -21,6 +21,8 @@
     MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     UINavigationController *mainNC = [[UINavigationController alloc] initWithRootViewController:mainVC];
     [mainNC setTitle:@"Home"];
+    
+    
     SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     UINavigationController *searchNC = [[UINavigationController alloc] initWithRootViewController:searchVC];
     [searchNC setTitle:@"Search"];
