@@ -33,8 +33,10 @@
     [super viewDidLoad];
     [self setTitle:@"Search"];
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]];
-    [self.navigationController.navigationBar setTranslucent:YES];
+    // [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:YES]];
+    
+    [[UISearchBar appearance] setTintColor:[ExtraMethods getColorFromHexString:@"6E370F"]];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     [self setTitle:@"Home"];
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]];
-    [self.navigationController.navigationBar setTranslucent:YES];
+    //[self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:NO]];
     
 }
