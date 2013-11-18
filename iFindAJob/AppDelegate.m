@@ -19,12 +19,17 @@
     // Begin custom code --
     // Navigation controllers --
     MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    UINavigationController *mainNC = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    [mainNC setTitle:@"Home"];
     SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainVC, searchVC, nil];
+    UINavigationController *searchNC = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    [searchNC setTitle:@"Search"];
+    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, nil];
     
     // Tab controller
     self.tabController = [[UITabBarController alloc] init];
     [self.tabController setViewControllers:allViewControllers animated:YES];
+    [[UITabBar appearance] setTintColor:[ExtraMethods getColorFromHexString:@"5E2700"]];
     self.window.rootViewController = self.tabController;
     // End custom code --
     
