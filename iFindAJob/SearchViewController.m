@@ -31,12 +31,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"Search"];
-    [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]];
-    // [self.navigationController.navigationBar setTranslucent:YES];
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:YES]];
     
-    [[UISearchBar appearance] setTintColor:[ExtraMethods getColorFromHexString:@"6E370F"]];
+    [self setTitle:@"Search"]; // Set title of window
+    
+    [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
+    
+    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:YES]]; // Set buttons on navigation bar
+    
+    [[UISearchBar appearance] setTintColor:[ExtraMethods getColorFromHexString:@"6E370F"]]; // Make search bar brown
+    
+    //[[UITabBar appearance] setImage:[UIImage imageNamed:@"search.png"]];
+    [self.tabBarItem setImage:[UIImage imageNamed:@"search.png"]]; // Set tab bar image
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

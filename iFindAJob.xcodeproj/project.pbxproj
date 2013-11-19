@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F506A4CA183B9CB3006CE9FD /* search_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C6183B9CB3006CE9FD /* search_selected.png */; };
+		F506A4CB183B9CB3006CE9FD /* search_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C7183B9CB3006CE9FD /* search_unselected.png */; };
+		F506A4CC183B9CB3006CE9FD /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C8183B9CB3006CE9FD /* home_selected.png */; };
+		F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C9183B9CB3006CE9FD /* home_unselected.png */; };
 		F556628B183A5E1A008FAA06 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628A183A5E1A008FAA06 /* UIKit.framework */; };
 		F556628D183A5E1A008FAA06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628C183A5E1A008FAA06 /* Foundation.framework */; };
 		F556628F183A5E1A008FAA06 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628E183A5E1A008FAA06 /* CoreGraphics.framework */; };
@@ -28,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F506A4C6183B9CB3006CE9FD /* search_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_selected.png; sourceTree = "<group>"; };
+		F506A4C7183B9CB3006CE9FD /* search_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_unselected.png; sourceTree = "<group>"; };
+		F506A4C8183B9CB3006CE9FD /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_selected.png; sourceTree = "<group>"; };
+		F506A4C9183B9CB3006CE9FD /* home_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_unselected.png; sourceTree = "<group>"; };
 		F5566287183A5E1A008FAA06 /* iFindAJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFindAJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F556628A183A5E1A008FAA06 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F556628C183A5E1A008FAA06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F506A4C1183B94FA006CE9FD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F506A4C6183B9CB3006CE9FD /* search_selected.png */,
+				F506A4C7183B9CB3006CE9FD /* search_unselected.png */,
+				F506A4C8183B9CB3006CE9FD /* home_selected.png */,
+				F506A4C9183B9CB3006CE9FD /* home_unselected.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		F556627E183A5E1A008FAA06 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +166,7 @@
 		F55662BB183A5F1E008FAA06 /* Includes */ = {
 			isa = PBXGroup;
 			children = (
+				F506A4C1183B94FA006CE9FD /* Images */,
 				F55662BC183A5F33008FAA06 /* ExtraMethods.h */,
 				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
 			);
@@ -218,6 +238,10 @@
 				F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */,
 				F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */,
 				F55662BA183A5F0A008FAA06 /* DataSourcesViewController.xib in Resources */,
+				F506A4CA183B9CB3006CE9FD /* search_selected.png in Resources */,
+				F506A4CB183B9CB3006CE9FD /* search_unselected.png in Resources */,
+				F506A4CC183B9CB3006CE9FD /* home_selected.png in Resources */,
+				F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

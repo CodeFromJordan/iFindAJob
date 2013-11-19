@@ -28,10 +28,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setTitle:@"Home"];
-    [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]];
-    //[self.navigationController.navigationBar setTranslucent:YES];
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:NO]];
+    [self setTitle:@"Home"]; // Set title of window
+    
+    [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
+    
+    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getDatasourcesButton:NO]]; // Set buttons on navigation bar
+    
     
 }
 
