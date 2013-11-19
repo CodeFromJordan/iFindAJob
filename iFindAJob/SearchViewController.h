@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UISearchBar *searchDisplay;
+@interface SearchViewController : UITableViewController <UISearchBarDelegate> {
+    BOOL isSearching;
+    
+    NSMutableArray *dataArray;
+}
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
