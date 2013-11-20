@@ -26,9 +26,8 @@
 		F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662AE183A5EDD008FAA06 /* MainViewController.xib */; };
 		F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662B2183A5EFA008FAA06 /* SearchViewController.m */; };
 		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
-		F55662B9183A5F0A008FAA06 /* DataSourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */; };
-		F55662BA183A5F0A008FAA06 /* DataSourcesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */; };
 		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
+		F58F6A32183CCB3D002F6678 /* JobSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58F6A31183CCB3D002F6678 /* JobSearchService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,11 +56,11 @@
 		F55662B1183A5EFA008FAA06 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		F55662B2183A5EFA008FAA06 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		F55662B3183A5EFA008FAA06 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		F55662B6183A5F0A008FAA06 /* DataSourcesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourcesViewController.h; sourceTree = "<group>"; };
-		F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourcesViewController.m; sourceTree = "<group>"; };
-		F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataSourcesViewController.xib; sourceTree = "<group>"; };
 		F55662BC183A5F33008FAA06 /* ExtraMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraMethods.h; sourceTree = "<group>"; };
 		F55662BD183A5F33008FAA06 /* ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraMethods.m; sourceTree = "<group>"; };
+		F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDelegate.h; sourceTree = "<group>"; };
+		F58F6A30183CCB3D002F6678 /* JobSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSearchService.h; sourceTree = "<group>"; };
+		F58F6A31183CCB3D002F6678 /* JobSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSearchService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +155,6 @@
 				F55662B1183A5EFA008FAA06 /* SearchViewController.h */,
 				F55662B2183A5EFA008FAA06 /* SearchViewController.m */,
 				F55662B3183A5EFA008FAA06 /* SearchViewController.xib */,
-				F55662B6183A5F0A008FAA06 /* DataSourcesViewController.h */,
-				F55662B7183A5F0A008FAA06 /* DataSourcesViewController.m */,
-				F55662B8183A5F0A008FAA06 /* DataSourcesViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -176,6 +172,9 @@
 		F55662BF183A7C2B008FAA06 /* Web Services */ = {
 			isa = PBXGroup;
 			children = (
+				F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */,
+				F58F6A30183CCB3D002F6678 /* JobSearchService.h */,
+				F58F6A31183CCB3D002F6678 /* JobSearchService.m */,
 			);
 			name = "Web Services";
 			sourceTree = "<group>";
@@ -237,7 +236,6 @@
 				F55662A1183A5E1A008FAA06 /* Default-568h@2x.png in Resources */,
 				F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */,
 				F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */,
-				F55662BA183A5F0A008FAA06 /* DataSourcesViewController.xib in Resources */,
 				F506A4CA183B9CB3006CE9FD /* search_selected.png in Resources */,
 				F506A4CB183B9CB3006CE9FD /* search_unselected.png in Resources */,
 				F506A4CC183B9CB3006CE9FD /* home_selected.png in Resources */,
@@ -256,8 +254,8 @@
 				F556629B183A5E1A008FAA06 /* AppDelegate.m in Sources */,
 				F55662AF183A5EDD008FAA06 /* MainViewController.m in Sources */,
 				F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */,
-				F55662B9183A5F0A008FAA06 /* DataSourcesViewController.m in Sources */,
 				F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */,
+				F58F6A32183CCB3D002F6678 /* JobSearchService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

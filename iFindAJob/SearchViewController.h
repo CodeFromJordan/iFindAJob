@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UITableViewController <UISearchBarDelegate> {
+#import "ServiceDelegate.h"
+#import "JobSearchService.h"
+#import "ExtraMethods.h"
+
+@interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
     BOOL isSearching;
     
-    NSMutableArray *dataArray;
+    NSMutableArray *dataArray; // List of jobs
+    NSMutableArray *searchResults; // Results returned from API
+    
+    NSOperationQueue *serviceQueue;
+
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

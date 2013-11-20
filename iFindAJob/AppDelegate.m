@@ -20,13 +20,15 @@
     // Navigation controllers --
     MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     UINavigationController *mainNC = [[UINavigationController alloc] initWithRootViewController:mainVC];
-    [mainNC setTitle:@"Home"];
+    [mainVC setTitle:@"Home"]; // Navigation bar title
+    [mainNC setTitle:@"Home"]; // Tab bar title
     [mainNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home_unselected.png"]];
     
     
     SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     UINavigationController *searchNC = [[UINavigationController alloc] initWithRootViewController:searchVC];
-    [searchNC setTitle:@"Search"];
+    [searchVC setTitle:@"Job Listing"]; // Navigation bar title
+    [searchNC setTitle:@"Find Jobs"]; // Tab bar title
     [searchNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"search_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"search_unselected.png"]];
     
     NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, nil];

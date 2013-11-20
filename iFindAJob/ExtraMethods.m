@@ -45,20 +45,15 @@
                            alpha:1.0f];
 }
 
-//+(NSArray*)getNavigationBarButtonArray {
-    // Buttons
-    //UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    //UIBarButtonItem* datasourcesButton = [[UIBarButtonItem alloc] initWithTitle:@"Data Sources" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    //NSArray *buttonArray = [[NSArray alloc] initWithObjects: shareButton, datasourcesButton, nil];
-    
-    //return buttonArray;
-//}
-
-+(NSMutableArray*)getShareButton:(BOOL)getSB getDatasourcesButton:(BOOL)gDsB {
++(NSMutableArray*)getShareButton:(BOOL)getSB getSettingsButton:(BOOL)gSB {
     
     NSMutableArray *buttonArray = [[NSMutableArray alloc] init];
+    
+    if(gSB) { // If settings button parameter passed
+        UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
+        
+        [buttonArray addObject:settingsButton]; // Add it to the array
+    }
     
     if(getSB) { // If share button parameter passed
         UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
@@ -66,13 +61,12 @@
         [buttonArray addObject:shareButton]; // Add it to the array
     }
     
-    if(gDsB) { // If datasources button parameter passed
-        UIBarButtonItem* datasourcesButton = [[UIBarButtonItem alloc] initWithTitle:@"Data Sources" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
-        
-        [buttonArray addObject:datasourcesButton]; // Add it to the array
-    }
-    
     return buttonArray;
+}
+
++(void)showErrorMessageWithTitle:(NSString*)title andMessage:(NSString*)message {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
