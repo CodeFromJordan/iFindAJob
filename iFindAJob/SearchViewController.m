@@ -126,9 +126,9 @@
             
             // Store given variables
             [j_info setValue:[job valueForKey:@"id"] forKey:@"id"];
-            [j_info setValue:[job valueForKey:@"category"] forKey:@"category"];
-            [j_info setValue:[job valueForKey:@"begin_date"] forKey:@"begin_date"];
-            [j_info setValue:[job valueForKey:@"location"] forKey:@"location"];
+            //[j_info setValue:[job valueForKey:@"category"] forKey:@"category"];
+            //[j_info setValue:[job valueForKey:@"begin_date"] forKey:@"begin_date"];
+            //[j_info setValue:[job valueForKey:@"location"] forKey:@"location"];
             
             [searchResults addObject:j_info];
         }
@@ -157,7 +157,7 @@
     [serviceQueue addOperation:service];
     
     [searchResults removeAllObjects];
-    [searchResults addObject: [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"-1", @"Searching..", @"", nil] forKeys:[NSArray arrayWithObjects:@"id", @"category", @"begin_date", @"location", nil]]];
+    // [searchResults addObject: [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"-1", @"Searching..", @"", nil] forKeys:[NSArray arrayWithObjects:@"id", @"category", @"begin_date", @"location", nil]]];
     [[self tableView] reloadData];
     
     // Hide the keyboard from th search bar
