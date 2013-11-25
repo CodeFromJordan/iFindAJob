@@ -16,9 +16,6 @@
     BOOL isSearching;
     BOOL performedSearch;
     
-    NSMutableArray *dataArray; // List of jobs
-    NSMutableArray *searchResults; // Results returned from API
-    
     NSOperationQueue *serviceQueue;
 
 }

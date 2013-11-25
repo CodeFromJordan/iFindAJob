@@ -16,6 +16,24 @@
 
 @synthesize searchBar;
 
+// Array to store region dictionaries {region1ItemsArrayDict, region2ItemsArrayDict} etc..
+NSMutableArray *dataArray; 
+
+// Dictionaries to hold job arrays {"job1", job1array} etc..
+NSMutableDictionary *savedItemsArrayDict;
+NSMutableDictionary *region1ItemsArrayDict;
+NSMutableDictionary *region2ItemsArrayDict;
+NSMutableDictionary *region3ItemsArrayDict;
+NSMutableDictionary *region4ItemsArrayDict;
+NSMutableDictionary *region5ItemsArrayDict;
+NSMutableDictionary *region6ItemsArrayDict;
+NSMutableDictionary *region7ItemsArrayDict;
+NSMutableDictionary *region8ItemsArrayDict;
+NSMutableDictionary *region9ItemsArrayDict;
+NSMutableDictionary *region10ItemsArrayDict;
+
+NSMutableArray *searchResults; // Results returned from API
+
 // Automatic Methods
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,65 +56,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Begin data array initialization --
-    dataArray = [[NSMutableArray alloc] init];
-    
-    // Section 0 - Saved jobs
-    NSMutableArray *savedItemsArray = [[NSMutableArray alloc] initWithObjects:@"Nothing saved yet..", nil];
-    NSDictionary *savedItemsArrayDict = [NSDictionary dictionaryWithObject:savedItemsArray forKey:@"data"];
-    [dataArray addObject: savedItemsArrayDict];
-    
-    // Section 1 - North East
-    NSMutableArray *firstItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *firstItemsArrayDict = [NSDictionary dictionaryWithObject:firstItemsArray forKey:@"data"];
-    [dataArray addObject: firstItemsArrayDict];
-    
-    // Section 2 - North West
-    NSMutableArray *secondItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *secondItemsArrayDict = [NSDictionary dictionaryWithObject:secondItemsArray forKey:@"data"];
-    [dataArray addObject: secondItemsArrayDict];
-    
-    // Section 3 - Yorkshire and the Humber
-    NSMutableArray *thirdItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *thirdItemsArrayDict = [NSDictionary dictionaryWithObject:thirdItemsArray forKey:@"data"];
-    [dataArray addObject: thirdItemsArrayDict];
-    
-    // Section 4 - East Midlands
-    NSMutableArray *fourthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *fourthItemsArrayDict = [NSDictionary dictionaryWithObject:fourthItemsArray forKey:@"data"];
-    [dataArray addObject: fourthItemsArrayDict];
-    
-    // Section 5 - West Midlands
-    NSMutableArray *fifthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *fifthItemsArrayDict = [NSDictionary dictionaryWithObject:fifthItemsArray forKey:@"data"];
-    [dataArray addObject: fifthItemsArrayDict];
-    
-    // Section 6 - East of England
-    NSMutableArray *sixthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *sixthItemsArrayDict = [NSDictionary dictionaryWithObject:sixthItemsArray forKey:@"data"];
-    [dataArray addObject: sixthItemsArrayDict];
-    
-    // Section 7 - London
-    NSMutableArray *seventhItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *seventhItemsArrayDict = [NSDictionary dictionaryWithObject:seventhItemsArray forKey:@"data"];
-    [dataArray addObject: seventhItemsArrayDict];
-    
-    // Section 8 - South East
-    NSMutableArray *eigthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *eigthItemsArrayDict = [NSDictionary dictionaryWithObject:eigthItemsArray forKey:@"data"];
-    [dataArray addObject: eigthItemsArrayDict];
-    
-    // Section 9 - South West
-    NSMutableArray *ninthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *ninthItemsArrayDict = [NSDictionary dictionaryWithObject:ninthItemsArray forKey:@"data"];
-    [dataArray addObject: ninthItemsArrayDict];
-    
-    // Section 10 - Outside of UK
-    NSMutableArray *tenthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
-    NSDictionary *tenthItemsArrayDict = [NSDictionary dictionaryWithObject:ninthItemsArray forKey:@"data"];
-    [dataArray addObject: tenthItemsArrayDict];
-    // End data array initialization --
+    [self initializeDataArrays];
     
     // Begin appearance --
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
@@ -110,6 +70,63 @@
     serviceQueue = [[NSOperationQueue alloc] init];
     [serviceQueue setMaxConcurrentOperationCount:1];
     // End setup
+}
+
+-(void)initializeDataArrays {
+    dataArray = [[NSMutableArray alloc] init];
+    
+    NSArray *templateArray = [[NSArray alloc] initWithObjects:@"Temporary Job 1", @"BCU", @"West Midlands", @"25/11/2013", nil];
+    
+    // Section 0 - Saved jobs
+    savedItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: savedItemsArrayDict];
+    
+    // Section 1 - North East
+    region1ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region1ItemsArrayDict];
+    
+    // Section 2 - North West
+    region2ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region2ItemsArrayDict];
+    
+    // Section 3 - Yorkshire and the Humber
+    region3ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region3ItemsArrayDict];
+    
+    // Section 4 - East Midlands
+    region4ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region4ItemsArrayDict];
+    
+    // Section 5 - West Midlands
+    region5ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region5ItemsArrayDict];
+    
+    // Section 6 - East of England
+    region6ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region6ItemsArrayDict];
+    
+    // Section 7 - London
+    region7ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region7ItemsArrayDict];
+    
+    // Section 8 - South East
+    region8ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region8ItemsArrayDict];
+    
+    // Section 9 - South West
+    region9ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region9ItemsArrayDict];
+    
+    // Section 10 - Outside of UK
+    region10ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    [dataArray addObject: region10ItemsArrayDict];
+}
+
+-(void)changeArray:(NSMutableArray*)array forDictionary:(NSMutableDictionary*)dictionary withData:(NSMutableArray*)data {
+    [array removeAllObjects]; // Clear array
+    [dictionary removeAllObjects]; // Clear dictionary
+    
+    // [array initWIthObjects:[data objectAtIndex:]]
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar { // When the user clicks search bar to perform text
@@ -138,12 +155,15 @@
             [searchResults addObject:j_info];
         }
         
+        // Use data to change arrays
+        //[self changeArray:savedItemsArray forDictionary:savedItemsArrayDict withData:searchResults];
+        
         // If there are no results found
         if([searchResults count] == 0) {
             [ExtraMethods showErrorMessageWithTitle:@"No Results Found" andMessage:@"There were no jobs found for the keywords that you provided."];
         }
         [[self tableView] reloadData]; // Reload existing table data
-    } else {
+    } else {      
         [searchResults removeAllObjects]; // Clear search result array
         
         [ExtraMethods showErrorMessageWithTitle:@"Error" andMessage:@"An error has occurred."];
@@ -198,10 +218,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section // Get number of rows in each section
 {
-    // Dictionary contains ["data", ["Job 1", "Job 2", "Job 3", nil]]
+    // Dictionary contains ["job", ["Job 1", "Job 2", "Job 3", nil]]
     NSDictionary *dictionary = [dataArray objectAtIndex:section];
-    NSArray *array = [dictionary objectForKey:@"data"];
-    return isSearching ? 1 : [array count]; // If searching, number of search results. Else number of jobs in each region to populate results.
+    NSArray *array = [dictionary objectForKey:@"job"];
+    return isSearching ? 1 : [dictionary count]; // If searching, number of search results. Else number of jobs in each region to populate results.
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -265,19 +285,12 @@
     if (cell == nil) { // If cell is empty
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier]; // Initialize cell
     }
-    
-    if(performedSearch == NO) { // If the user has not performed a search, put temporary cells
-        NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Create new dictionary for each individual section
-        NSArray *array = [dictionary objectForKey:@"data"]; // Get the actual job data from the dictionary
-        NSString *cellValue = [array objectAtIndex:indexPath.row]; // Get contents for each individual cell from array
-        cell.textLabel.text = cellValue; // Populate main title parts of each cell
-        cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"]; // Change color of main title
-    }
-    else { // If the user has performed a search
-        NSDictionary *job = [searchResults objectAtIndex:indexPath.row];
-        [[cell textLabel] setText:[job valueForKey:@"Temporary Title"]];
-        [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Posted by %@ on %@", [job valueForKey:@"job_company_name"], [job valueForKey:@"job_post_date"]]];
-    }
+
+    NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Create new dictionary for each individual section
+    NSArray *array = [dictionary objectForKey:@"job"]; // Get the actual job data from the dictionary
+    NSString *cellValue = [array objectAtIndex:0]; // Get titles of each job
+    cell.textLabel.text = cellValue; // Populate main title parts of each cell
+    cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"]; // Change color of main title
     
     return cell;
 }
@@ -287,7 +300,7 @@
     // Get selected job
     NSString *selectedCell = nil; // String to store selected cell details
     NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Get details of selected row, add to dictionary
-    NSArray *array = [dictionary objectForKey:@"data"]; // Get rows of data section from dictionary
+    NSArray *array = [dictionary objectForKey:@"job"]; // Get rows of data section from dictionary
     selectedCell = [array objectAtIndex:indexPath.row]; // Dump contents of selected row into string
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; // Deselect chosen row animation
