@@ -21,7 +21,7 @@
     // Begin API declarations --
     // AuthenticJobs
     NSString *api_key = @"5e389f733b28cfe33ac2f03aef32fb1a";
-    NSString *url = [NSString stringWithFormat:@"http://www.authenticjobs.com/api/?api_key=%@0&method=aj.jobs.search&keywords=%@", api_key, search_term];
+    NSString *url = [NSString stringWithFormat:@"http://www.authenticjobs.com/api/?api_key=%@&method=aj.jobs.search&keywords=%@&format=json", api_key, search_term];
     // End API declarations --
     
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
@@ -30,17 +30,24 @@
     NSData *responseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:nil error:nil];
     
     if(responseData != nil) {
-        NSString *dataReturned = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        // NSLog(dataReturned);
+        /*
+         DEBUGGING: Uncomment the following two lines to print what API call returns
+         NSString *dataReturned = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+         NSLog(dataReturned);
+        */
         
         NSError *error = nil;
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-        // NSLog(error);
+        
+        /*
+         DEBUGGING: Uncomment the next line to see contents of error from JSON parsing
+         NSLog(@"Error: %@", error);
+         */
         
         if(error) {
             [delegate serviceFinished:self withError:YES];
         } else {
-            results = (NSArray *)[json valueForKey:@"movies"];
+            results = (NSArray *)[json valueForKeyPath:@"listings.listing"];
             [delegate serviceFinished:self withError:NO];
         }
     } else {

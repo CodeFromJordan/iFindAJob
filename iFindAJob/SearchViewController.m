@@ -91,6 +91,11 @@
     NSMutableArray *ninthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
     NSDictionary *ninthItemsArrayDict = [NSDictionary dictionaryWithObject:ninthItemsArray forKey:@"data"];
     [dataArray addObject: ninthItemsArrayDict];
+    
+    // Section 10 - Outside of UK
+    NSMutableArray *tenthItemsArray = [[NSMutableArray alloc] initWithObjects:@"No results yet..", nil];
+    NSDictionary *tenthItemsArrayDict = [NSDictionary dictionaryWithObject:ninthItemsArray forKey:@"data"];
+    [dataArray addObject: tenthItemsArrayDict];
     // End data array initialization --
     
     // Begin appearance --
@@ -125,10 +130,10 @@
             NSMutableDictionary *j_info = [[NSMutableDictionary alloc] init];
             
             // Store given variables
-            [j_info setValue:[job valueForKey:@"id"] forKey:@"id"];
-            //[j_info setValue:[job valueForKey:@"category"] forKey:@"category"];
-            //[j_info setValue:[job valueForKey:@"begin_date"] forKey:@"begin_date"];
-            //[j_info setValue:[job valueForKey:@"location"] forKey:@"location"];
+            [j_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
+            [j_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
+            [j_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"];
+            [j_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
             
             [searchResults addObject:j_info];
         }
@@ -156,8 +161,7 @@
     [service setDelegate:self];
     [serviceQueue addOperation:service];
     
-    [searchResults removeAllObjects];
-    // [searchResults addObject: [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"-1", @"Searching..", @"", nil] forKeys:[NSArray arrayWithObjects:@"id", @"category", @"begin_date", @"location", nil]]];
+    [ExtraMethods showErrorMessageWithTitle:@"Searching" andMessage:@"Your job search is now taking place and the results should appear shortly."];
     [[self tableView] reloadData];
     
     // Hide the keyboard from th search bar
@@ -238,6 +242,10 @@
     if(section==9)
     {
         return @"South West";
+    }
+    if(section==10)
+    {
+        return @"Outside of UK";
     }
     else // Just in case
     {
