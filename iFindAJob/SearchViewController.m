@@ -166,6 +166,9 @@
     
     // Hide the keyboard from th search bar
     [searchBar resignFirstResponder];
+    
+    // Set performedSearch to true
+    performedSearch = YES;
 }
 
 -(void)searchDone:(id)sender { // Called when search done button clicked
@@ -258,15 +261,23 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) { // If cell is empty
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier]; // Initialize cell
     }
     
-    NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Create new dictionary for each individual section
-    NSArray *array = [dictionary objectForKey:@"data"]; // // Get the actual job data from the dictionary
-    NSString *cellValue = [array objectAtIndex:indexPath.row]; // Get contents for each individual cell from array
-    cell.textLabel.text = cellValue; // Populate main title parts of each cell
-    cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"]; // Change color of main title
+    if(performedSearch == NO) { // If the user has not performed a search, put temporary cells
+        NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Create new dictionary for each individual section
+        NSArray *array = [dictionary objectForKey:@"data"]; // Get the actual job data from the dictionary
+        NSString *cellValue = [array objectAtIndex:indexPath.row]; // Get contents for each individual cell from array
+        cell.textLabel.text = cellValue; // Populate main title parts of each cell
+        cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"]; // Change color of main title
+    }
+    else { // If the user has performed a search
+        NSDictionary *job = [searchResults objectAtIndex:indexPath.row];
+        [[cell textLabel] setText:[job valueForKey:@"Temporary Title"]];
+        [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Posted by %@ on %@", [job valueForKey:@"job_company_name"], [job valueForKey:@"job_post_date"]]];
+    }
     
     return cell;
 }

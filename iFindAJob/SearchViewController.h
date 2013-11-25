@@ -14,6 +14,7 @@
 
 @interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
     BOOL isSearching;
+    BOOL performedSearch;
     
     NSMutableArray *dataArray; // List of jobs
     NSMutableArray *searchResults; // Results returned from API
