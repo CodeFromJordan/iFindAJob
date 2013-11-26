@@ -53,14 +53,13 @@ NSMutableArray *searchResults; // Results returned from API
     [searchBar setPlaceholder:@"Enter job keywords.."]; // Reset placeholder for search bar
     [searchBar setDelegate:self]; // Allows search bar to be used
     isSearching = NO;
+    performedSearch = NO;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initializeDataArrays];
-    
-    application = [UIApplication sharedApplication];
+    [self initializeDataDictionaries];
     
     // Begin appearance --
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
@@ -76,10 +75,10 @@ NSMutableArray *searchResults; // Results returned from API
     // End setup
 }
 
--(void)initializeDataArrays {
+-(void)initializeDataDictionaries {
     dataArray = [[NSMutableArray alloc] init];
     
-    NSMutableArray *templateArray = [[NSMutableArray alloc] initWithObjects:@"7777", @"Placeholder Job 1", @"Birmingham City University", @"West Midlands", @"2013-11-21", nil];
+    NSMutableArray *templateArray = [[NSMutableArray alloc] initWithObjects:@"No jobs to display yet.", nil];
     
     // Section 0 - Saved jobs
     savedItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
@@ -124,6 +123,12 @@ NSMutableArray *searchResults; // Results returned from API
     // Section 10 - Outside of UK
     region10ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region10ItemsArrayDict];
+    
+    performedSearch = NO;
+}
+
+-(void)clearDataDictionaries {
+    [region1ItemsArrayDict removeAllObjects];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar { // When the user clicks search bar to perform text
@@ -133,7 +138,32 @@ NSMutableArray *searchResults; // Results returned from API
     [[self navigationItem] setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(searchDone:)]]; // Add Cancel/Done button to navigation bar
     
     [searchResults removeAllObjects];
-    [[self tableView] reloadData]; // Force table to reload and redraw contents
+    
+    //[[self tableView] reloadData]; // Force table to reload and redraw contents
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+    // Retrieve search term from search bar
+    NSString *searchTerm = [searchBar text];
+    
+    [self initializeDataDictionaries]; // Reset data dictionaries ready for new search
+    [self clearDataDictionaries];
+    
+    JobSearchService *service = [[JobSearchService alloc] init];
+    [service setSearchTerm:searchTerm];
+    [service setDelegate:self];
+    [serviceQueue addOperation:service];
+    
+    //[[self tableView] reloadData]; // Refresh table
+    
+    // Interface changes
+    [searchBar resignFirstResponder];
+    [[self navigationItem] setLeftBarButtonItem:nil]; 
+    [searchBar setText:@"Searching.."];
+    
+    // Change search booleans
+    isSearching = NO;
+    performedSearch = YES;
 }
 
 -(void)serviceFinished:(id)service withError:(BOOL)error {
@@ -159,21 +189,19 @@ NSMutableArray *searchResults; // Results returned from API
         
         // If there are no results found
         if([searchResults count] == 0) {
-            [self initializeDataArrays]; // Reset to default table data
-            [ExtraMethods showErrorMessageWithTitle:@"No Results Found..." andMessage:@"There were no jobs found for the keywords that you provided."]; // Show 'No Results' message
+            [searchBar setText:@"No Results Found.."];
         }
-        
+        else
+        {
+            [searchBar setText:@"Search Completed.."];
+        }
     } else {
-        [self initializeDataArrays]; // Reset to default table data
+        [self initializeDataDictionaries]; // Reset to default table data
         [searchResults removeAllObjects]; // Clear search result array
-        
-        [ExtraMethods showErrorMessageWithTitle:@"Error..." andMessage:@"An error has occurred."]; // Show 'Error' message
+        [searchBar setText:@"An error as occurred.."];
     }
 
     [[self tableView] reloadData]; // Refresh table
-    [searchBar setText:@"Search Done.."];
-    [ExtraMethods showErrorMessageWithTitle:@"Searching Done..." andMessage:@"Job search finished, please pull down to refresh data."]; // Show 'Searching' message
-    application.networkActivityIndicatorVisible = NO; // Make spinner invisible
 }
 
 -(void)addJobToDataArray:(NSMutableDictionary*)job { // Loop through all jobs and add them to dictionary
@@ -240,28 +268,6 @@ NSMutableArray *searchResults; // Results returned from API
 
 -(NSInteger)whichRegion:(NSString*)jobLocation { // Uses the location posted with the job to decide which world region to put job into
     return 1; // Temporary
-}
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)sb {
-    [searchBar setText:@"Searching.."];
-    
-    // Retrieve search term from search bar
-    NSString *searchTerm = [searchBar text];
-    
-    JobSearchService *service = [[JobSearchService alloc] init];
-    [service setSearchTerm:searchTerm];
-    [service setDelegate:self];
-    [serviceQueue addOperation:service];
-    
-    application.networkActivityIndicatorVisible = YES; // Make spinner invisible
-    [[self tableView] reloadData]; // Refresh table
-    
-    // Hide the keyboard from th search bar
-    [searchBar resignFirstResponder];
-    
-    // Set performedSearch to true
-    performedSearch = YES;
-    isSearching = NO;
 }
 
 -(void)searchDone:(id)sender { // Called when search done button clicked
@@ -364,15 +370,22 @@ NSMutableArray *searchResults; // Results returned from API
     NSDictionary *dictionary = [dataArray objectAtIndex:[indexPath section]]; // Create new dictionary for each individual section
     NSArray *array = [dictionary objectForKey:[NSString stringWithFormat:@"job_%d", [indexPath row]]]; // Get the actual job data from the dictionary
     
-    if([dictionary count] == 0)
+    if(performedSearch == NO) // If user hasn't searched yet
     {
-        cell.textLabel.text = @"No jobs here yet.";
+        cell.textLabel.text = [array objectAtIndex:0]; // Main title of cell (job title)
     }
-    else
+    else // If the user has searched 
     {
-        // Populate cells
-        cell.textLabel.text = [array objectAtIndex:1]; // Main title of cell (job title)
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ | %@", [array objectAtIndex:2], [array objectAtIndex:4]]; // Details of cell, company and date posted
+        if([array count] > 1)
+        {
+            // Populate cells
+            cell.textLabel.text = [array objectAtIndex:1]; // Main title of cell (job title)
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ | %@", [array objectAtIndex:2], [array objectAtIndex:4]]; // Details of cell, company and date posted
+        }
+        else
+        {
+            cell.textLabel.text = [array objectAtIndex:0];
+        }
     }
     
     

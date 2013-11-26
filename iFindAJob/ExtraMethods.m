@@ -66,7 +66,7 @@
 
 +(void)showErrorMessageWithTitle:(NSString*)title andMessage:(NSString*)message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
 }
 
 @end
