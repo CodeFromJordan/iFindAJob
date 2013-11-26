@@ -16,6 +16,8 @@
 
 @synthesize searchBar;
 
+UIApplication *application;
+
 // Array to store region dictionaries {region1ItemsArrayDict, region2ItemsArrayDict} etc..
 NSMutableArray *dataArray; 
 
@@ -58,6 +60,8 @@ NSMutableArray *searchResults; // Results returned from API
     [super viewDidLoad];
     [self initializeDataArrays];
     
+    application = [UIApplication sharedApplication];
+    
     // Begin appearance --
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
     [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getSettingsButton:YES]]; // Set buttons on navigation bar
@@ -75,104 +79,172 @@ NSMutableArray *searchResults; // Results returned from API
 -(void)initializeDataArrays {
     dataArray = [[NSMutableArray alloc] init];
     
-    NSArray *templateArray = [[NSArray alloc] initWithObjects:@"Temporary Job 1", @"BCU", @"West Midlands", @"25/11/2013", nil];
+    NSMutableArray *templateArray = [[NSMutableArray alloc] initWithObjects:@"7777", @"Placeholder Job 1", @"Birmingham City University", @"West Midlands", @"2013-11-21", nil];
     
     // Section 0 - Saved jobs
-    savedItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    savedItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: savedItemsArrayDict];
     
     // Section 1 - North East
-    region1ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region1ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region1ItemsArrayDict];
     
     // Section 2 - North West
-    region2ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region2ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region2ItemsArrayDict];
     
     // Section 3 - Yorkshire and the Humber
-    region3ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region3ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region3ItemsArrayDict];
     
     // Section 4 - East Midlands
-    region4ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region4ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region4ItemsArrayDict];
     
     // Section 5 - West Midlands
-    region5ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region5ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region5ItemsArrayDict];
     
     // Section 6 - East of England
-    region6ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region6ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region6ItemsArrayDict];
     
     // Section 7 - London
-    region7ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region7ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region7ItemsArrayDict];
     
     // Section 8 - South East
-    region8ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region8ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region8ItemsArrayDict];
     
     // Section 9 - South West
-    region9ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region9ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region9ItemsArrayDict];
     
     // Section 10 - Outside of UK
-    region10ItemsArrayDict = [NSDictionary dictionaryWithObject:templateArray forKey:@"job"];
+    region10ItemsArrayDict = [NSMutableDictionary dictionaryWithObject:templateArray forKey:@"job_0"];
     [dataArray addObject: region10ItemsArrayDict];
 }
 
--(void)changeArray:(NSMutableArray*)array forDictionary:(NSMutableDictionary*)dictionary withData:(NSMutableArray*)data {
-    [array removeAllObjects]; // Clear array
-    [dictionary removeAllObjects]; // Clear dictionary
-    
-    // [array initWIthObjects:[data objectAtIndex:]]
-}
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar { // When the user clicks search bar to perform text
+    [searchBar setText:@""]; // Clear text box when clicked
     isSearching = YES; // Set searching to YES
     
     [[self navigationItem] setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(searchDone:)]]; // Add Cancel/Done button to navigation bar
     
     [searchResults removeAllObjects];
-     [[self tableView] reloadData]; // Force table to reload and redraw contents
+    [[self tableView] reloadData]; // Force table to reload and redraw contents
 }
 
 -(void)serviceFinished:(id)service withError:(BOOL)error {
     if(!error) {
-        [searchResults removeAllObjects];
-        
+      
         for (NSDictionary *job in [service results]) {
             // Create dictionary to store multiple values for a job
             NSMutableDictionary *j_info = [[NSMutableDictionary alloc] init];
             
-            // Store given variables
+            // Store given variables in search results
             [j_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
+            [j_info setValue:[[job valueForKey:@"category"] valueForKey:@"name"] forKey:@"job_title"];
             [j_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
-            [j_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"];
             [j_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
+            [j_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"];
             
+            // Add job to search results array
             [searchResults addObject:j_info];
+            
+            // Add job to main data
+            [self addJobToDataArray:j_info];
         }
-        
-        // Use data to change arrays
-        //[self changeArray:savedItemsArray forDictionary:savedItemsArrayDict withData:searchResults];
         
         // If there are no results found
         if([searchResults count] == 0) {
-            [ExtraMethods showErrorMessageWithTitle:@"No Results Found" andMessage:@"There were no jobs found for the keywords that you provided."];
+            [self initializeDataArrays]; // Reset to default table data
+            [ExtraMethods showErrorMessageWithTitle:@"No Results Found..." andMessage:@"There were no jobs found for the keywords that you provided."]; // Show 'No Results' message
         }
-        [[self tableView] reloadData]; // Reload existing table data
-    } else {      
+        
+    } else {
+        [self initializeDataArrays]; // Reset to default table data
         [searchResults removeAllObjects]; // Clear search result array
         
-        [ExtraMethods showErrorMessageWithTitle:@"Error" andMessage:@"An error has occurred."];
-
-        [[self tableView] reloadData]; // Reload existing table data
+        [ExtraMethods showErrorMessageWithTitle:@"Error..." andMessage:@"An error has occurred."]; // Show 'Error' message
     }
+
+    [[self tableView] reloadData]; // Refresh table
+    [searchBar setText:@"Search Done.."];
+    [ExtraMethods showErrorMessageWithTitle:@"Searching Done..." andMessage:@"Job search finished, please pull down to refresh data."]; // Show 'Searching' message
+    application.networkActivityIndicatorVisible = NO; // Make spinner invisible
+}
+
+-(void)addJobToDataArray:(NSMutableDictionary*)job { // Loop through all jobs and add them to dictionary
+    // Read dictionary values into string objects
+    NSString *job_id = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_id"]];
+    
+    NSString *job_title = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_title"]];
+    
+    NSString *job_company_name = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_company_name"]];
+    if([job_company_name length] > 29) // If company name length is more than 29 characters long, it pushes date out of cell
+    {
+        job_company_name = [job_company_name substringToIndex:27]; // Cut it to 27 characters with two dots
+        job_company_name = [NSString stringWithFormat:@"%@..", job_company_name];
+    }
+    
+    NSString *job_location = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_location"]];
+    
+    NSString *job_post_date = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_post_date"]]; // Returns date and time
+    job_post_date = [job_post_date substringToIndex:10]; // Cut time from string
+    
+    NSString *nextKeyCalculation = [NSString stringWithFormat:@"job_%d", [savedItemsArrayDict count]]; // Calculates next key in dictionary
+    
+    // Temporary array used to store jobs. Must be initialized to stop crash
+    NSMutableArray *jobToAddArray = [[NSMutableArray alloc] initWithObjects: job_id, job_title, job_company_name, job_location, job_post_date, nil];
+    
+    // Add item to dictionary
+    switch([self whichRegion:job_location]) // Figure out which array to put into and do it
+    {
+        case 1: // North East
+            [region1ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 2: // North West
+            [region2ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 3: // Yorkshire and the Humber
+            [region3ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 4: // East Midlands
+            [region4ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 5: // West Midlands
+            [region5ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 6: // East of England
+            [region6ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 7: // London
+            [region7ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 8: // South East
+            [region8ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 9: // South West
+            [region9ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        case 10: // Outside of UK
+            [region10ItemsArrayDict setObject:jobToAddArray forKey:nextKeyCalculation];
+            break;
+        default: // Any number other than ones above, then not in any of the regions
+            break;
+    }
+    
+}
+
+-(NSInteger)whichRegion:(NSString*)jobLocation { // Uses the location posted with the job to decide which world region to put job into
+    return 1; // Temporary
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+    [searchBar setText:@"Searching.."];
+    
     // Retrieve search term from search bar
     NSString *searchTerm = [searchBar text];
     
@@ -181,14 +253,15 @@ NSMutableArray *searchResults; // Results returned from API
     [service setDelegate:self];
     [serviceQueue addOperation:service];
     
-    [ExtraMethods showErrorMessageWithTitle:@"Searching" andMessage:@"Your job search is now taking place and the results should appear shortly."];
-    [[self tableView] reloadData];
+    application.networkActivityIndicatorVisible = YES; // Make spinner invisible
+    [[self tableView] reloadData]; // Refresh table
     
     // Hide the keyboard from th search bar
     [searchBar resignFirstResponder];
     
     // Set performedSearch to true
     performedSearch = YES;
+    isSearching = NO;
 }
 
 -(void)searchDone:(id)sender { // Called when search done button clicked
@@ -196,6 +269,8 @@ NSMutableArray *searchResults; // Results returned from API
     
     [searchBar resignFirstResponder]; // Hide the keyboard from the search bar
     [searchResults removeAllObjects];
+    
+    isSearching = NO;
     
     [[self tableView] reloadData];
     
@@ -218,9 +293,9 @@ NSMutableArray *searchResults; // Results returned from API
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section // Get number of rows in each section
 {
-    // Dictionary contains ["job", ["Job 1", "Job 2", "Job 3", nil]]
+    // Dictionary contains ["job#", ["Job 1", "Job 2", "Job 3", nil]]
     NSDictionary *dictionary = [dataArray objectAtIndex:section];
-    NSArray *array = [dictionary objectForKey:@"job"];
+    // NSArray *array = [dictionary objectForKey:@"job"];
     return isSearching ? 1 : [dictionary count]; // If searching, number of search results. Else number of jobs in each region to populate results.
 }
 
@@ -286,22 +361,34 @@ NSMutableArray *searchResults; // Results returned from API
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier]; // Initialize cell
     }
 
-    NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Create new dictionary for each individual section
-    NSArray *array = [dictionary objectForKey:@"job"]; // Get the actual job data from the dictionary
-    NSString *cellValue = [array objectAtIndex:0]; // Get titles of each job
-    cell.textLabel.text = cellValue; // Populate main title parts of each cell
+    NSDictionary *dictionary = [dataArray objectAtIndex:[indexPath section]]; // Create new dictionary for each individual section
+    NSArray *array = [dictionary objectForKey:[NSString stringWithFormat:@"job_%d", [indexPath row]]]; // Get the actual job data from the dictionary
+    
+    if([dictionary count] == 0)
+    {
+        cell.textLabel.text = @"No jobs here yet.";
+    }
+    else
+    {
+        // Populate cells
+        cell.textLabel.text = [array objectAtIndex:1]; // Main title of cell (job title)
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ | %@", [array objectAtIndex:2], [array objectAtIndex:4]]; // Details of cell, company and date posted
+    }
+    
+    
+    // Cell formatting
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"]; // Change color of main title
     
-    return cell;
+    return cell; // Pass back cell contents
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath // Row selected
 {
     // Get selected job
     NSString *selectedCell = nil; // String to store selected cell details
-    NSDictionary *dictionary = [dataArray objectAtIndex:indexPath.section]; // Get details of selected row, add to dictionary
+    NSDictionary *dictionary = [dataArray objectAtIndex:[indexPath section]]; // Get details of selected row, add to dictionary
     NSArray *array = [dictionary objectForKey:@"job"]; // Get rows of data section from dictionary
-    selectedCell = [array objectAtIndex:indexPath.row]; // Dump contents of selected row into string
+    selectedCell = [array objectAtIndex:[indexPath row]]; // Dump contents of selected row into string
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; // Deselect chosen row animation
 }
