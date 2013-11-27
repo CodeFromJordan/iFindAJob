@@ -10,6 +10,6 @@
 
 @protocol ServiceDelegate <NSObject>
 
-- (void)serviceFinished:(id)service withError:(BOOL)error;
+- (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString*)searchTerm;
 
 @end

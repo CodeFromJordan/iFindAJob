@@ -45,13 +45,13 @@
          */
         
         if(error) {
-            [delegate serviceFinished:self withError:YES];
+            [delegate serviceFinished:self withError:YES forSearchTerm:search_term];
         } else {
             results = (NSArray *)[json valueForKeyPath:@"listings.listing"];
-            [delegate serviceFinished:self withError:NO];
+            [delegate serviceFinished:self withError:NO forSearchTerm:search_term];
         }
     } else {
-        [delegate serviceFinished:self withError:YES];
+        [delegate serviceFinished:self withError:YES forSearchTerm:search_term];
     }
 }
 
