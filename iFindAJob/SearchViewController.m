@@ -107,33 +107,31 @@ NSMutableArray *searchResults; // Results returned from API
 }
 
 -(void)initializeDataInDictionary:(NSMutableDictionary*)dictionary withData:(NSArray*)array { // Resets data in a specific dictionary
-    //[self clearDataInDictionary:dictionary]; // Ensure that dictionary is empty before re-initializing
-    
     dictionary = [NSMutableDictionary dictionaryWithObject:array forKey:@"job_0"]; // Set up initial row
     [dataArray addObject: dictionary]; // Add it to dataArray
 }
 
 -(void)clearAllDictionaries{
     // Section 1 - North East
-    [self clearDataInDictionary:region2ItemsArrayDict];
-    // Section 2 - North West
-    [self clearDataInDictionary:region3ItemsArrayDict];
-    // Section 3 - Yorkshire and the Humber
-    [self clearDataInDictionary:region4ItemsArrayDict];
-    // Section 4 - East Midlands
-    [self clearDataInDictionary:region5ItemsArrayDict];
-    // Section 5 - West Midlands
-    [self clearDataInDictionary:region6ItemsArrayDict];
-    // Section 6 - East of England
-    [self clearDataInDictionary:region7ItemsArrayDict];
-    // Section 7 - London
-    [self clearDataInDictionary:region8ItemsArrayDict];
-    // Section 8 - South East
-    [self clearDataInDictionary:region9ItemsArrayDict];
-    // Section 9 - South West
-    [self clearDataInDictionary:region10ItemsArrayDict];
-    // Section 10 - Outside of UK
     [self clearDataInDictionary:region1ItemsArrayDict];
+    // Section 2 - North West
+    [self clearDataInDictionary:region2ItemsArrayDict];
+    // Section 3 - Yorkshire and the Humber
+    [self clearDataInDictionary:region3ItemsArrayDict];
+    // Section 4 - East Midlands
+    [self clearDataInDictionary:region4ItemsArrayDict];
+    // Section 5 - West Midlands
+    [self clearDataInDictionary:region5ItemsArrayDict];
+    // Section 6 - East of England
+    [self clearDataInDictionary:region6ItemsArrayDict];
+    // Section 7 - London
+    [self clearDataInDictionary:region7ItemsArrayDict];
+    // Section 8 - South East
+    [self clearDataInDictionary:region8ItemsArrayDict];
+    // Section 9 - South West
+    [self clearDataInDictionary:region9ItemsArrayDict];
+    // Section 10 - Outside of UK
+    [self clearDataInDictionary:region10ItemsArrayDict];
 }
 
 -(void)clearDataInDictionary:(NSMutableDictionary*)dictionary { // Removes all objects from passed dictionary
@@ -141,17 +139,15 @@ NSMutableArray *searchResults; // Results returned from API
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar { // When the user clicks search bar to perform text
-    [searchBar setText:@""]; // Clear text box when clicked
+    [self.searchBar setText:@""]; // Clear text box when clicked
     isSearching = YES; // Set searching to YES
     
     [[self navigationItem] setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(searchDone:)]]; // Add Cancel/Done button to navigation bar
-    
-    [searchResults removeAllObjects];
-    
-    //[[self tableView] reloadData]; // Force table to reload and redraw contents
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+    [searchResults removeAllObjects]; // Clear already existing search results
+    
     // Retrieve search term from search bar
     NSString *searchTerm = [searchBar text];
     
@@ -162,8 +158,6 @@ NSMutableArray *searchResults; // Results returned from API
     [service setSearchTerm:searchTerm];
     [service setDelegate:self];
     [serviceQueue addOperation:service];
-    
-    //[[self tableView] reloadData]; // Refresh table
     
     // Interface changes
     [searchBar resignFirstResponder];
@@ -293,6 +287,7 @@ NSMutableArray *searchResults; // Results returned from API
     [searchBar resignFirstResponder]; // Hide the keyboard from the search bar
     [searchResults removeAllObjects];
     
+    
     isSearching = NO;
     
     [[self navigationItem] setLeftBarButtonItem:nil]; // Remove the Cancel/Done button from the navigation bar
@@ -400,7 +395,7 @@ NSMutableArray *searchResults; // Results returned from API
         }
         else // If the array has only one element, it means that there are no jobs to display.
         {
-            cell.textLabel.text = @"No jobs to display..";
+            cell.textLabel.text = @"No results in this location..";
             cell.detailTextLabel.text = @"";
         }
     }
