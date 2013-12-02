@@ -31,6 +31,8 @@
 		F593D38D184CB88700668841 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D38C184CB88700668841 /* Job.m */; };
 		F593D396184CC0F200668841 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D394184CC0F200668841 /* JobDetailViewController.m */; };
 		F593D397184CC0F200668841 /* JobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D395184CC0F200668841 /* JobDetailViewController.xib */; };
+		F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D399184CD8A600668841 /* JobListingViewController.m */; };
+		F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D39A184CD8A600668841 /* JobListingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,9 @@
 		F593D393184CC0F200668841 /* JobDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
 		F593D394184CC0F200668841 /* JobDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
 		F593D395184CC0F200668841 /* JobDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailViewController.xib; sourceTree = "<group>"; };
+		F593D398184CD8A600668841 /* JobListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobListingViewController.h; sourceTree = "<group>"; };
+		F593D399184CD8A600668841 /* JobListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobListingViewController.m; sourceTree = "<group>"; };
+		F593D39A184CD8A600668841 /* JobListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobListingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +171,9 @@
 				F593D393184CC0F200668841 /* JobDetailViewController.h */,
 				F593D394184CC0F200668841 /* JobDetailViewController.m */,
 				F593D395184CC0F200668841 /* JobDetailViewController.xib */,
+				F593D398184CD8A600668841 /* JobListingViewController.h */,
+				F593D399184CD8A600668841 /* JobListingViewController.m */,
+				F593D39A184CD8A600668841 /* JobListingViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -254,6 +262,7 @@
 				F506A4CC183B9CB3006CE9FD /* home_selected.png in Resources */,
 				F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */,
 				F593D397184CC0F200668841 /* JobDetailViewController.xib in Resources */,
+				F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +281,7 @@
 				F58F6A32183CCB3D002F6678 /* JobSearchService.m in Sources */,
 				F593D38D184CB88700668841 /* Job.m in Sources */,
 				F593D396184CC0F200668841 /* JobDetailViewController.m in Sources */,
+				F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

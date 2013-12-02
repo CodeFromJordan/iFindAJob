@@ -15,7 +15,7 @@
 @interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
     BOOL isSearching;
     
-    NSMutableArray *jobs;
+    NSMutableArray *locations;
     NSMutableArray *searchResults;
     
     NSOperationQueue *serviceQueue;

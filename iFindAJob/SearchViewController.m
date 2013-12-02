@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "JobListingViewController.h"
 
 @interface SearchViewController ()
 
@@ -39,7 +40,7 @@
     settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
     
     // Create basic Film list for testing display
-    jobs = [NSMutableArray arrayWithCapacity:100];
+    locations = [NSMutableArray arrayWithCapacity:100];
     searchResults = [NSMutableArray arrayWithCapacity:100];
     
     // Set up service queue
@@ -49,15 +50,15 @@
     // Restore saved job list
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString*documentsDirectory = [paths objectAtIndex:0];
-    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"jobs.xml"];
-    jobs = [[NSMutableArray alloc] initWithContentsOfFile: yourArrayFileName];
-    if(jobs == nil) {
-        jobs = [NSMutableArray arrayWithCapacity:0];
+    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+    locations = [[NSMutableArray alloc] initWithContentsOfFile: yourArrayFileName];
+    if(locations == nil) {
+        locations = [NSMutableArray arrayWithCapacity:0];
     }
     
     // Sort films
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_title" ascending:YES];
-    [jobs sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
+    [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
     
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
     
@@ -107,7 +108,7 @@
     if(!error) {
         [searchResults removeAllObjects];
         
-        for (NSDictionary *job in [service results]) {
+        for (NSDictionary *location in [service results]) {
             // Create dictionary to store multiple values for a film
             NSMutableDictionary *location_info = [[NSMutableDictionary alloc] initWithCapacity:3];
                      
@@ -120,11 +121,15 @@
             [j_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"];
              */
             
-            [location_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"]; // Add it to the dictionary to be displayed
+            NSString* locationToAdd = [[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"]; // Add it to the dictionary to be displayed
+            
+            [location_info setValue:[[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"]; // Add it to the dictionary to be displayed
             
             // Add movie info to main list
-            //if([searchResults valueForKey:job_location]
-            [searchResults addObject:location_info];
+            if(![[searchResults valueForKey:@"job_location"] containsObject:locationToAdd]) // Only add location to search results array if it doesn't already exist in it
+            {
+                [searchResults addObject:location_info];
+            }
         }
         
         // If there are no results found
@@ -177,7 +182,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return isSearching ? [searchResults count] : [jobs count];
+    return isSearching ? [searchResults count] : [locations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -190,8 +195,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    NSDictionary *job = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [jobs objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[job valueForKey:@"job_location"]];
+    NSDictionary *location = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [locations objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:[location valueForKey:@"job_location"]];
     
     return cell;
 }
@@ -210,22 +215,22 @@
     // If row is deleted, remove it from the list
     if (editingStyle == UITableViewCellEditingStyleDelete){
         // Remove from arrays
-        NSDictionary *job = [jobs objectAtIndex:[indexPath row]];
+        NSDictionary *location = [locations objectAtIndex:[indexPath row]];
         
         // Delete thumbnail if present
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir, [job valueForKey:@"id"]];
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir, [location valueForKey:@"id"]];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if([fileManager fileExistsAtPath:pngFilePath]) {
             [fileManager removeItemAtPath:pngFilePath error:nil];
         }
         
         // Remove from list and save changes
-        [jobs removeObject:job];
+        [locations removeObject:location];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"jobs.xml"];
-        [jobs writeToFile:yourArrayFileName atomically:YES];
+        NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+        [locations writeToFile:yourArrayFileName atomically:YES];
         
         // Triffer remove animation on table
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -254,12 +259,12 @@
 {
     if (isSearching) {
         // Use for interaction with search list
-        NSDictionary *movie = [searchResults objectAtIndex:[indexPath row]];
+        NSDictionary *location = [searchResults objectAtIndex:[indexPath row]];
         
         // Check label for system messages
-        if([[jobs valueForKey:@"id"] intValue] != -1) {
+        if([[locations valueForKey:@"id"] intValue] != -1) {
             // Add new film to list
-            [jobs addObject:movie];
+            [locations addObject:location];
             
             // Clear search text
             [searchBar setText:@""];
@@ -276,26 +281,24 @@
             
             // Sort films
             NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_location" ascending:YES];
-            [jobs sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
+            [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
             
             
             // Store data
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"jobs.xml"];
-            [jobs writeToFile:yourArrayFileName atomically:YES];
+            NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+            [locations writeToFile:yourArrayFileName atomically:YES];
         }
     } else {
         // Use for interaction with film list
-        NSDictionary *job = [jobs objectAtIndex:[indexPath row]];
+        NSDictionary *location = [locations objectAtIndex:[indexPath row]];
         
-        /* UNCOMMENT FOR JOB DETAILS
-        FilmDetailsViewController *vc = [[FilmDetailsViewController alloc] initWithNibName:@"FilmDetailsViewController" bundle:nil];
+        JobListingViewController *jobListingView = [[JobListingViewController alloc] initWithNibName:@"JobListingViewController" bundle:nil];
         
-        [vc setMovie:job];
+        // [jobListingView setLocation:location];
         
-        [[self navigationController] pushViewController:vc animated:YES];
-         */
+        [[self navigationController] pushViewController:jobListingView animated:YES];
     }
 }
 
@@ -305,8 +308,8 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"jobs.xml"];
-    [jobs writeToFile:yourArrayFileName atomically:YES];
+    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+    [locations writeToFile:yourArrayFileName atomically:YES];
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
