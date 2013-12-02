@@ -28,6 +28,9 @@
 		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
 		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
 		F58F6A32183CCB3D002F6678 /* JobSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58F6A31183CCB3D002F6678 /* JobSearchService.m */; };
+		F593D38D184CB88700668841 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D38C184CB88700668841 /* Job.m */; };
+		F593D396184CC0F200668841 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D394184CC0F200668841 /* JobDetailViewController.m */; };
+		F593D397184CC0F200668841 /* JobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D395184CC0F200668841 /* JobDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,11 @@
 		F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDelegate.h; sourceTree = "<group>"; };
 		F58F6A30183CCB3D002F6678 /* JobSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSearchService.h; sourceTree = "<group>"; };
 		F58F6A31183CCB3D002F6678 /* JobSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSearchService.m; sourceTree = "<group>"; };
+		F593D38B184CB88700668841 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		F593D38C184CB88700668841 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
+		F593D393184CC0F200668841 /* JobDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
+		F593D394184CC0F200668841 /* JobDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
+		F593D395184CC0F200668841 /* JobDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +163,9 @@
 				F55662B1183A5EFA008FAA06 /* SearchViewController.h */,
 				F55662B2183A5EFA008FAA06 /* SearchViewController.m */,
 				F55662B3183A5EFA008FAA06 /* SearchViewController.xib */,
+				F593D393184CC0F200668841 /* JobDetailViewController.h */,
+				F593D394184CC0F200668841 /* JobDetailViewController.m */,
+				F593D395184CC0F200668841 /* JobDetailViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -165,6 +176,8 @@
 				F506A4C1183B94FA006CE9FD /* Images */,
 				F55662BC183A5F33008FAA06 /* ExtraMethods.h */,
 				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
+				F593D38B184CB88700668841 /* Job.h */,
+				F593D38C184CB88700668841 /* Job.m */,
 			);
 			name = Includes;
 			sourceTree = "<group>";
@@ -240,6 +253,7 @@
 				F506A4CB183B9CB3006CE9FD /* search_unselected.png in Resources */,
 				F506A4CC183B9CB3006CE9FD /* home_selected.png in Resources */,
 				F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */,
+				F593D397184CC0F200668841 /* JobDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +270,8 @@
 				F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */,
 				F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */,
 				F58F6A32183CCB3D002F6678 /* JobSearchService.m in Sources */,
+				F593D38D184CB88700668841 /* Job.m in Sources */,
+				F593D396184CC0F200668841 /* JobDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

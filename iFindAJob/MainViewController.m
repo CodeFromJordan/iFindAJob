@@ -20,6 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        // Setup button
     }
     return self;
 }
@@ -31,7 +33,8 @@
     
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
     
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:[ExtraMethods getShareButton:YES getSettingsButton:NO]]; // Set buttons on navigation bar
+    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
+    [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add share button
     
     
 }

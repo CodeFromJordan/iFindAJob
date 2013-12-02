@@ -14,9 +14,13 @@
 
 @interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
     BOOL isSearching;
-    BOOL performedSearch;
+    
+    NSMutableArray *jobs;
+    NSMutableArray *searchResults;
     
     NSOperationQueue *serviceQueue;
+    
+    UIBarButtonItem* settingsButton;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

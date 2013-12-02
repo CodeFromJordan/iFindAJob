@@ -10,6 +10,5 @@
 
 @interface ExtraMethods : NSObject
 +(UIColor*)getColorFromHexString:(NSString*)hex;
-+(NSMutableArray*)getShareButton:(BOOL)getSB getSettingsButton:(BOOL)gSB;
 +(void)showErrorMessageWithTitle:(NSString*)title andMessage:(NSString*)message;
 @end
