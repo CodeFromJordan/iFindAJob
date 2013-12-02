@@ -27,7 +27,7 @@
     
     SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     UINavigationController *searchNC = [[UINavigationController alloc] initWithRootViewController:searchVC];
-    [searchVC setTitle:@"Job Listing"]; // Navigation bar title
+    [searchVC setTitle:@"Jobs In.."]; // Navigation bar title
     [searchNC setTitle:@"Find Jobs"]; // Tab bar title
     [searchNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"search_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"search_unselected.png"]];
     

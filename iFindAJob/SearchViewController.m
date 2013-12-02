@@ -123,7 +123,15 @@
             
             NSString* locationToAdd = [[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"]; // Add it to the dictionary to be displayed
             
-            [location_info setValue:[[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"]; // Add it to the dictionary to be displayed
+            if([locationToAdd length] == 0)
+            {
+                locationToAdd = @"No Location Provided";
+                [location_info setValue:@"No Location Provided" forKey:@"job_location"];
+            }
+            else
+            {
+                [location_info setValue:[[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"]; // Add it to the dictionary to be displayed
+            }
             
             // Add movie info to main list
             if(![[searchResults valueForKey:@"job_location"] containsObject:locationToAdd]) // Only add location to search results array if it doesn't already exist in it
@@ -201,15 +209,6 @@
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     // If row is deleted, remove it from the list
@@ -262,7 +261,7 @@
         NSDictionary *location = [searchResults objectAtIndex:[indexPath row]];
         
         // Check label for system messages
-        if([[locations valueForKey:@"id"] intValue] != -1) {
+        if(![[locations valueForKey:@"job_location"] isEqual:@""]) {
             // Add new film to list
             [locations addObject:location];
             
@@ -283,7 +282,6 @@
             NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_location" ascending:YES];
             [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
             
-            
             // Store data
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -294,11 +292,14 @@
         // Use for interaction with film list
         NSDictionary *location = [locations objectAtIndex:[indexPath row]];
         
-        JobListingViewController *jobListingView = [[JobListingViewController alloc] initWithNibName:@"JobListingViewController" bundle:nil];
+        JobListingViewController *jobListingVC = [[JobListingViewController alloc] initWithNibName:@"JobListingViewController" bundle:nil];
+        UINavigationController *jobListingNC = [[UINavigationController alloc] initWithRootViewController:jobListingVC];
+        [jobListingVC setTitle:@"Job Results"]; // Navigation bar title
+        [jobListingNC setTitle:@"Job Results"]; // Tab bar title
         
         // [jobListingView setLocation:location];
         
-        [[self navigationController] pushViewController:jobListingView animated:YES];
+        [[self navigationController] pushViewController:jobListingNC animated:YES];
     }
 }
 
