@@ -36,10 +36,7 @@
     [searchBar setDelegate:self];
     isSearching = NO;
     
-    // Setup button
-    settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
-    
-    // Create basic Film list for testing display
+    // Create location and search result array
     locations = [NSMutableArray arrayWithCapacity:100];
     searchResults = [NSMutableArray arrayWithCapacity:100];
     
@@ -57,14 +54,13 @@
     }
     
     // Sort films
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_title" ascending:YES];
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_location" ascending:YES];
     [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
     
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
     
     // Begin appearance --
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItem:settingsButton]; // Add settings button
     [[UISearchBar appearance] setTintColor:[ExtraMethods getColorFromHexString:@"6E370F"]]; // Make search bar brown
     // End appearance --
 }
@@ -80,7 +76,7 @@
     [[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(searchDone:)]];
     [[self navigationItem] setLeftBarButtonItem:nil];
     
-    // Force Table to reload and withdraw
+    // Force Table to reload and redraw
     [searchResults removeAllObjects];
     [[self tableView] reloadData];
 }
@@ -111,32 +107,20 @@
         for (NSDictionary *location in [service results]) {
             // Create dictionary to store multiple values for a film
             NSMutableDictionary *location_info = [[NSMutableDictionary alloc] initWithCapacity:3];
-                     
-            /*
-            // Store given variables
-            [j_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
-            [j_info setValue:[[job valueForKey:@"category"] valueForKey:@"name"] forKey:@"job_title"];
-            [j_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
-            [j_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
-            [j_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"];
-             */
             
-            NSString* locationToAdd = [[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"]; // Add it to the dictionary to be displayed
+            NSString* idOfLocationToAdd = [location valueForKey:@"id"]; // Used to check if already exists
             
-            if([locationToAdd length] == 0)
+            if(![idOfLocationToAdd length] == 0) // If job result has a location
             {
-                locationToAdd = @"No Location Provided";
-                [location_info setValue:@"No Location Provided" forKey:@"job_location"];
-            }
-            else
-            {
-                [location_info setValue:[[[location valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_location"]; // Add it to the dictionary to be displayed
-            }
-            
-            // Add movie info to main list
-            if(![[searchResults valueForKey:@"job_location"] containsObject:locationToAdd]) // Only add location to search results array if it doesn't already exist in it
-            {
-                [searchResults addObject:location_info];
+                [location_info setValue:[location valueForKey:@"id"] forKey:@"job_location_id"]; // Add ID to dictionary
+                [location_info setValue:[location valueForKey:@"city"] forKey:@"job_location"]; // Add location to dictionary
+                [location_info setValue:searchTerm forKey:@"job_keyword"]; // Add keyword that brought job up to dictionary
+                
+                // Add movie info to main list
+                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd]) // Only add location to search results array if it doesn't already exist in it
+                {
+                    [searchResults addObject:location_info];
+                }
             }
         }
         
@@ -149,9 +133,10 @@
         }
         
         [[self tableView] reloadData];
-    } else {
+    } else { // Serious error, show error message
         [searchResults removeAllObjects];
-        [searchBar setText:[NSString stringWithFormat:@"Error for '%@'..", searchTerm]];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
         [[self tableView] reloadData];
     }
 }
@@ -160,7 +145,7 @@
     // Retrieve search term for search bar
     NSString *searchTerm = [searchBar text];
     
-    JobSearchService *service = [[JobSearchService alloc] init];
+    LocationSearchService *service = [[LocationSearchService alloc] init];
     [service setSearchTerm:searchTerm];
     [service setDelegate:self];
     [serviceQueue addOperation:service];
@@ -218,11 +203,6 @@
         
         // Delete thumbnail if present
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir, [location valueForKey:@"id"]];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if([fileManager fileExistsAtPath:pngFilePath]) {
-            [fileManager removeItemAtPath:pngFilePath error:nil];
-        }
         
         // Remove from list and save changes
         [locations removeObject:location];
@@ -261,7 +241,7 @@
         NSDictionary *location = [searchResults objectAtIndex:[indexPath row]];
         
         // Check label for system messages
-        if(![[locations valueForKey:@"job_location"] isEqual:@""]) {
+        if(![[locations valueForKey:@"job_location"] isEqual:@"N/A"]) {
             // Add new film to list
             [locations addObject:location];
             
@@ -293,13 +273,11 @@
         NSDictionary *location = [locations objectAtIndex:[indexPath row]];
         
         JobListingViewController *jobListingVC = [[JobListingViewController alloc] initWithNibName:@"JobListingViewController" bundle:nil];
-        UINavigationController *jobListingNC = [[UINavigationController alloc] initWithRootViewController:jobListingVC];
         [jobListingVC setTitle:@"Job Results"]; // Navigation bar title
-        [jobListingNC setTitle:@"Job Results"]; // Tab bar title
         
-        // [jobListingView setLocation:location];
+        [jobListingVC setLocation:location];
         
-        [[self navigationController] pushViewController:jobListingNC animated:YES];
+        [[self navigationController] pushViewController:jobListingVC animated:YES];
     }
 }
 

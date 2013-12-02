@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ServiceDelegate.h"
-#import "JobSearchService.h"
+#import "LocationSearchService.h"
 #import "ExtraMethods.h"
 
 @interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
@@ -19,8 +19,6 @@
     NSMutableArray *searchResults;
     
     NSOperationQueue *serviceQueue;
-    
-    UIBarButtonItem* settingsButton;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

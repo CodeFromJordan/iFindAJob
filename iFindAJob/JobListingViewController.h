@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ExtraMethods.h"
+#import "ServiceDelegate.h"
 
-@interface JobListingViewController : UITableViewController
+@interface JobListingViewController : UITableViewController <ServiceDelegate> {
+    NSMutableArray *jobs;
+    NSMutableArray *searchResults;
+    
+    NSOperationQueue *serviceQueue;
+}
+
+@property (nonatomic, retain) NSDictionary *location;
 
 @end

@@ -1,8 +1,8 @@
 //
-//  JobSearchService.h
+//  LocationSearchService.h
 //  iFindAJob
 //
-//  Created by Jordan Hancock on 02/12/2013.
+//  Created by Jordan Hancock on 20/11/2013.
 //  Copyright (c) 2013 Jordan Hancock. All rights reserved.
 //
 
@@ -10,15 +10,13 @@
 
 #import "ServiceDelegate.h"
 
-@interface JobSearchService : NSOperation {
+@interface LocationSearchService : NSOperation {
     NSString *searchTerm;
-    NSString* locationId;
     id<ServiceDelegate> delegate;
     
     NSArray *results;
 }
 
-@property (nonatomic, retain) NSString *locationId;
 @property (nonatomic, retain) NSString *searchTerm;
 @property (nonatomic, retain) id<ServiceDelegate> delegate;
 
