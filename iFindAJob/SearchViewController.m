@@ -55,7 +55,7 @@
     }
     
     // Sort films
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_location" ascending:YES];
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
     [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
     
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
@@ -121,7 +121,8 @@
                 [location_info setValue:searchTerm forKey:@"job_keyword"];
                 
                 // Add movie info to main list
-                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"city"] isEqual:nil]) // Only add location to search results array if it doesn't already exist in it
+                // Search result location cannot be duplicate in searchResults OR locations, it also must actually have a ity
+                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"name"] isEqual:nil] && ![[locations valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd]) // Only add location to search results array if it doesn't already exist in it
                 {
                     [searchResults addObject:location_info];
                 }
@@ -196,7 +197,7 @@
     NSNumber *jobCount = [location valueForKey:@"job_count"];
     NSString *jobString = ([jobCount integerValue] > 1) ? @"jobs" : @"job";
     [[cell textLabel] setText:[location valueForKey:@"job_location"]];
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ %@", [location valueForKey:@"job_count"], jobString]];
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ reported %@", [location valueForKey:@"job_count"], jobString]];
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
     cell.detailTextLabel.textColor = [ExtraMethods getColorFromHexString:@"000000"];
     
@@ -262,13 +263,14 @@
             
             // Clear search results and reset state
             isSearching = NO;
+            [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
             [searchResults removeAllObjects];
             
             // Force table to reload and redraw
             [[self tableView] reloadData];
             
             // Sort films
-            NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_location" ascending:YES];
+            NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
             [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
             
             // Store data

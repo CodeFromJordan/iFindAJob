@@ -48,7 +48,7 @@
     // Setup text boxes
     [txtJobTitle setText:[job valueForKey:@"job_title"]];
     [txtJobCompany setText:[NSString stringWithFormat:@"For Company: %@", [job valueForKey:@"job_company_name"]]];
-    [txtJobPostDate setText:[NSString stringWithFormat:@"Post Date: %@", [job valueForKey:@"job_post_date"]]];
+    [txtJobPostDate setText:[NSString stringWithFormat:@"Posted: %@", [job valueForKey:@"job_post_date"]]];
     [txtJobDescription setText:[self stripHTMLFromString:[job valueForKey:@"job_description"]]];
     
     // Setup switches
