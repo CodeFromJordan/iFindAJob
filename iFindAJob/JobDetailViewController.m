@@ -7,7 +7,10 @@
 //
 
 #import "JobDetailViewController.h"
+#import "ExtraMethods.h"
 #import <Social/Social.h>
+
+#import <QuartzCore/QuartzCore.h> 
 
 @interface JobDetailViewController ()
 
@@ -18,8 +21,8 @@
 @synthesize txtJobTitle;
 @synthesize txtJobCompany;
 @synthesize txtJobPostDate;
-@synthesize swtRelocation;
-@synthesize swtCommuting;
+@synthesize txtRelocationSwitch;
+@synthesize txtCommutingSwitch;
 @synthesize txtJobDescription;
 @synthesize btnOpenBrowser;
 
@@ -45,9 +48,12 @@
     
     [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add share button to left side of screen
     
+    [[txtJobDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[txtJobDescription layer] setBorderWidth:1];
+    
     // Setup text boxes
     [txtJobTitle setText:[job valueForKey:@"job_title"]];
-    [txtJobCompany setText:[NSString stringWithFormat:@"For Company: %@", [job valueForKey:@"job_company_name"]]];
+    [txtJobCompany setText:[NSString stringWithFormat:@"for %@", [job valueForKey:@"job_company_name"]]];
     [txtJobPostDate setText:[NSString stringWithFormat:@"Posted: %@", [job valueForKey:@"job_post_date"]]];
     [txtJobDescription setText:[self stripHTMLFromString:[job valueForKey:@"job_description"]]];
     
@@ -55,21 +61,21 @@
     // Relocation assistance
     if([[job valueForKey:@"job_has_relocation_assistance"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
-        [swtRelocation setOn:YES];
+        [txtRelocationSwitch setText:@"YES"];
     }
     else
     {
-        [swtRelocation setOn:NO];
+        [txtRelocationSwitch setText:@"NO"];
     }
     
     // Commuting
     if([[job valueForKey:@"job_requires_telecommuting"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
-        [swtCommuting setOn:YES];
+        [txtCommutingSwitch setText:@"YES"];
     }
     else
     {
-        [swtCommuting setOn:NO];
+        [txtCommutingSwitch setText:@"NO"];
     }
     
     // Setup web opening button
