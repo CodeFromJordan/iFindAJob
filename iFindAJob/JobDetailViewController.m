@@ -48,7 +48,7 @@
     [txtJobTitle setText:[job valueForKey:@"job_title"]];
     [txtJobCompany setText:[NSString stringWithFormat:@"For Company: %@", [job valueForKey:@"job_company_name"]]];
     [txtJobPostDate setText:[NSString stringWithFormat:@"Post Date: %@", [job valueForKey:@"job_post_date"]]];
-    [txtJobDescription setText:[self stringByStrippingHTMLForString:[job valueForKey:@"job_description"]]];
+    [txtJobDescription setText:[self stripHTMLFromString:[job valueForKey:@"job_description"]]];
     
     // Setup switches
     // Relocation assistance
@@ -72,7 +72,7 @@
     }
     
     // Setup web opening button
-    [btnOpenBrowser addTarget:self action:@selector(openURLInSafari) forControlEvents:UIControlEventTouchUpInside];
+    [btnOpenBrowser addTarget:self action:@selector(openURLInSafari:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (IBAction)openURLInSafari:(UIButton *)sender
@@ -86,7 +86,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSString *) stringByStrippingHTMLForString:(NSString*)string { // Remove HTML from string
+-(NSString *) stripHTMLFromString:(NSString*)string { // Remove HTML from string
     NSRange r;
     while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
         string = [string stringByReplacingCharactersInRange:r withString:@""];
