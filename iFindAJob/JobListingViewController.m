@@ -7,6 +7,7 @@
 //
 
 #import "JobListingViewController.h"
+#import "JobDetailViewController.h"
 #import "JobSearchService.h"
 #import "ExtraMethods.h"
 
@@ -66,11 +67,17 @@
             
             if(![idOfJobToAdd length] == 0) // If job result has a location
             {
+                // Add items to dictionary
+                // Used for table and detail view
                 [job_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
-                //[job_info setValue:[[job valueForKey:@"category"] valueForKey:@"name"] forKey:@"job_title"];
                 [job_info setValue:[job valueForKey:@"title"] forKey:@"job_title"];
                 [job_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
                 [job_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
+                // Only used for detail view
+                [job_info setValue:[job valueForKey:@"description"] forKey:@"job_description"];
+                [job_info setValue:[job valueForKey:@"url"] forKey:@"job_post_url"];
+                [job_info setValue:[job valueForKey:@"relocation_assistance"] forKey:@"job_has_relocation_assistance"];
+                [job_info setValue:[job valueForKey:@"telecommuting"] forKey:@"job_requires_telecommuting"];
                 
                 // Add movie info to main list
                 if(![[searchResults valueForKey:@"job_id"] containsObject:idOfJobToAdd]) // Only add location to search results array if it doesn't already exist in it
@@ -171,13 +178,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // Use for interaction with film list
+    NSDictionary *job = [searchResults objectAtIndex:[indexPath row]];
+    
+    JobDetailViewController *jobDetailVC = [[JobDetailViewController alloc] initWithNibName:@"JobDetailViewController" bundle:nil];
+    [jobDetailVC setTitle:@"Job Details"]; // Navigation bar title
+    
+    [jobDetailVC setJob:job];
+    
+    [[self navigationController] pushViewController:jobDetailVC animated:YES];
 }
 
 @end

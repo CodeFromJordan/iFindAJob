@@ -11,7 +11,6 @@
 @interface MainViewController : UIViewController
 {
     UIBarButtonItem* shareButton;
-    UIBarButtonItem* settingsButton;
 }
 
 @end

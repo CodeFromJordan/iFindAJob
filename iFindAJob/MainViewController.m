@@ -34,10 +34,9 @@
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
     
     // Setup button
-    shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
+    shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share App" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
     
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItem:settingsButton]; // Add settings button to right side of screen
-    [self.navigationController.topViewController.navigationItem setLeftBarButtonItem:shareButton]; // Add share button to left side of screen
+    [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add share button to left side of screen
 }
 
 - (void)didReceiveMemoryWarning
