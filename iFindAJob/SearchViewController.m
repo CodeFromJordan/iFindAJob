@@ -71,7 +71,7 @@
     isSearching = YES;
     
     // Clear the search bar
-    [searchBar setText:@""];
+    [self.searchBar setText:@""];
     
     // Add Cancel/Done button to navigation bar
     [[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(searchDone:)]];
@@ -210,9 +210,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete){
         // Remove from arrays
         NSDictionary *location = [locations objectAtIndex:[indexPath row]];
-        
-        // Delete thumbnail if present
-        NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
         // Remove from list and save changes
         [locations removeObject:location];
