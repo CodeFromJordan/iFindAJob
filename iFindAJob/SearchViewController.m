@@ -8,6 +8,7 @@
 
 #import "SearchViewController.h"
 #import "JobListingViewController.h"
+#import "ExtraMethods.h"
 
 @interface SearchViewController ()
 
@@ -113,11 +114,12 @@
             if(![idOfLocationToAdd length] == 0) // If job result has a location
             {
                 [location_info setValue:[location valueForKey:@"id"] forKey:@"job_location_id"]; // Add ID to dictionary
-                [location_info setValue:[location valueForKey:@"city"] forKey:@"job_location"]; // Add location to dictionary
+                [location_info setValue:[location valueForKey:@"name"] forKey:@"job_location"]; // Add location to dictionary
+                [location_info setValue:[location valueForKey:@"count"] forKey:@"job_count"]; // Add job count
                 [location_info setValue:searchTerm forKey:@"job_keyword"]; // Add keyword that brought job up to dictionary
                 
                 // Add movie info to main list
-                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd]) // Only add location to search results array if it doesn't already exist in it
+                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"city"] isEqual:nil]) // Only add location to search results array if it doesn't already exist in it
                 {
                     [searchResults addObject:location_info];
                 }
@@ -129,7 +131,7 @@
             [searchBar setText:[NSString stringWithFormat:@"No results for '%@'..", searchTerm]];
         }
         else{
-            [searchBar setText:[NSString stringWithFormat:@"Jobs in '%@' found in these locations..", searchTerm]];
+            [searchBar setText:[NSString stringWithFormat:@"'%@' jobs found in these locations..", searchTerm]];
         }
         
         [[self tableView] reloadData];
@@ -189,7 +191,12 @@
     }
     
     NSDictionary *location = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [locations objectAtIndex:[indexPath row]];
+    NSNumber *jobCount = [location valueForKey:@"job_count"];
+    NSString *jobString = ([jobCount integerValue] > 1) ? @"jobs" : @"job";
     [[cell textLabel] setText:[location valueForKey:@"job_location"]];
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ %@", [location valueForKey:@"job_count"], jobString]];
+    cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
+    cell.detailTextLabel.textColor = [ExtraMethods getColorFromHexString:@"000000"];
     
     return cell;
 }

@@ -22,7 +22,7 @@
     // Begin API declarations --
     // AuthenticJobs
     NSString *api_key = @"5e389f733b28cfe33ac2f03aef32fb1a";
-    NSString *url = [NSString stringWithFormat:@"http://www.authenticjobs.com/api/?api_key=%@&method=aj.jobs.search&keywords=%@&location=%@&format=json", api_key, locationId, search_term];
+    NSString *url = [NSString stringWithFormat:@"http://www.authenticjobs.com/api/?api_key=%@&method=aj.jobs.search&keywords=%@&location=%@&format=json", api_key, search_term, locationId];
     // End API declarations --
     
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];

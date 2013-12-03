@@ -8,6 +8,7 @@
 
 #import "JobListingViewController.h"
 #import "JobSearchService.h"
+#import "ExtraMethods.h"
 
 @interface JobListingViewController ()
 
@@ -40,8 +41,8 @@
     
     // Perform search
     JobSearchService *service = [[JobSearchService alloc] init];
-    [service setSearchTerm:[location valueForKey:@"job_location_id"]];
-    NSString *test = [service searchTerm];
+    [service setSearchTerm:[location valueForKey:@"job_keyword"]];
+    [service setLocationId:[location valueForKey:@"job_location_id"]];
     [service setDelegate:self];
     [serviceQueue addOperation:service];
     
@@ -53,7 +54,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString*)searchTerm {
+- (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString *)searchTerm {
     if(!error) {
         [searchResults removeAllObjects];
         
@@ -66,7 +67,8 @@
             if(![idOfJobToAdd length] == 0) // If job result has a location
             {
                 [job_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
-                [job_info setValue:[[job valueForKey:@"category"] valueForKey:@"name"] forKey:@"job_title"];
+                //[job_info setValue:[[job valueForKey:@"category"] valueForKey:@"name"] forKey:@"job_title"];
+                [job_info setValue:[job valueForKey:@"title"] forKey:@"job_title"];
                 [job_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
                 [job_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
                 
@@ -90,13 +92,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [jobs count];
+    return [searchResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,9 +111,19 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    NSDictionary *job = [jobs objectAtIndex:[indexPath row]];
+    NSDictionary *job = [searchResults objectAtIndex:[indexPath row]];
     [[cell textLabel] setText:[job valueForKey:@"job_title"]];
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Posted by %@ on %@", [job valueForKey:@"job_job_company_name"], [job valueForKey:@"post_date"]]] ;
+                             
+    NSString *job_company_name = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_company_name"]];
+        job_company_name = [job_company_name length] > 19 ? [NSString stringWithFormat:@"%@..", [job_company_name substringToIndex:19]] : job_company_name; // More than 26 characters for company name pushes date out of cell, so cut it down
+    NSString *job_post_date = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_post_date"]]; // Returns date and time
+        job_post_date = [job_post_date substringToIndex:10]; // Cut time from string
+    
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Posted by %@ on %@", job_company_name, job_post_date]] ;
+    
+    // Cell text formatting
+    cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
+    cell.detailTextLabel.textColor = [ExtraMethods getColorFromHexString:@"000000"];
     
     return cell;
 }
