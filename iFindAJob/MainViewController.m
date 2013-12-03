@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "ExtraMethods.h"
+#import <Social/Social.h>
 
 @interface MainViewController ()
 
@@ -34,9 +35,24 @@
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
     
     // Setup button
-    shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share App" style:UIBarButtonItemStylePlain target:nil action:nil]; // Create the button
+    shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share App" style:UIBarButtonItemStylePlain target:self action:@selector(postAppToSocial:)]; // Create the button
     
     [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add share button to left side of screen
+}
+
+- (IBAction)postAppToSocial:(UIButton *)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:@"Live on the planet? Looking for a job in I.T.? You should download iFindAJob from Apple's app store!"];
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Tweet" message:@"Unable to post Tweet right now. Please ensure that you have an internet connection and that the device has a Twitter account registered." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -141,7 +141,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Posted On: [job_post_date]</string>
+						<string key="IBUIText">Posted: [job_post_date]</string>
 						<reference key="IBUITextColor" ref="842943342"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -1240,17 +1240,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">JobDetailViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">openURLInSafari:</string>
-						<string key="NS.object.0">UIButton</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">openURLInSafari:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="openURLInSafari:">UIButton</string>
+						<string key="postJobToSocial:">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="openURLInSafari:">
 							<string key="name">openURLInSafari:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="postJobToSocial:">
+							<string key="name">postJobToSocial:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btnOpenBrowser">UIButton</string>
 						<string key="swtCommuting">UISwitch</string>
