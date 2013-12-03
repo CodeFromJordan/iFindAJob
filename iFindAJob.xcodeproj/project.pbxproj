@@ -34,6 +34,11 @@
 		F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D399184CD8A600668841 /* JobListingViewController.m */; };
 		F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D39A184CD8A600668841 /* JobListingViewController.xib */; };
 		F5B40996184CFC8300A5F0B3 /* JobSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B40995184CFC8300A5F0B3 /* JobSearchService.m */; };
+		F5D14318184E31DE00E9AD09 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D14317184E31DE00E9AD09 /* Default.png */; };
+		F5D1431A184E326200E9AD09 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D14319184E326200E9AD09 /* Default@2x.png */; };
+		F5D1431C184E326400E9AD09 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431B184E326400E9AD09 /* Default-568h@2x.png */; };
+		F5D1431E184E34D200E9AD09 /* iconretina.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431D184E34D200E9AD09 /* iconretina.png */; };
+		F5D14320184E34D500E9AD09 /* iconregular.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431F184E34D500E9AD09 /* iconregular.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +82,11 @@
 		F593D39A184CD8A600668841 /* JobListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobListingViewController.xib; sourceTree = "<group>"; };
 		F5B40994184CFC8300A5F0B3 /* JobSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSearchService.h; sourceTree = "<group>"; };
 		F5B40995184CFC8300A5F0B3 /* JobSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSearchService.m; sourceTree = "<group>"; };
+		F5D14317184E31DE00E9AD09 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F5D14319184E326200E9AD09 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F5D1431B184E326400E9AD09 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F5D1431D184E34D200E9AD09 /* iconretina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconretina.png; sourceTree = "<group>"; };
+		F5D1431F184E34D500E9AD09 /* iconregular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconregular.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +119,11 @@
 		F556627E183A5E1A008FAA06 = {
 			isa = PBXGroup;
 			children = (
+				F5D1431F184E34D500E9AD09 /* iconregular.png */,
+				F5D1431D184E34D200E9AD09 /* iconretina.png */,
+				F5D1431B184E326400E9AD09 /* Default-568h@2x.png */,
+				F5D14319184E326200E9AD09 /* Default@2x.png */,
+				F5D14317184E31DE00E9AD09 /* Default.png */,
 				F5566290183A5E1A008FAA06 /* iFindAJob */,
 				F5566289183A5E1A008FAA06 /* Frameworks */,
 				F5566288183A5E1A008FAA06 /* Products */,
@@ -268,6 +283,11 @@
 				F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */,
 				F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */,
 				F508B5EA184E0BEB00946C41 /* JobDetailViewController.xib in Resources */,
+				F5D14318184E31DE00E9AD09 /* Default.png in Resources */,
+				F5D1431A184E326200E9AD09 /* Default@2x.png in Resources */,
+				F5D1431C184E326400E9AD09 /* Default-568h@2x.png in Resources */,
+				F5D1431E184E34D200E9AD09 /* iconretina.png in Resources */,
+				F5D14320184E34D500E9AD09 /* iconregular.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
