@@ -53,7 +53,7 @@
     
     // Setup switches
     // Relocation assistance
-    if([[job valueForKey:@"job_has_relocation_assistance"] isEqual:@"1"])
+    if([[job valueForKey:@"job_has_relocation_assistance"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         [swtRelocation setOn:YES];
     }
@@ -63,7 +63,7 @@
     }
     
     // Commuting
-    if([[job valueForKey:@"job_requires_telecommuting"] isEqual:@"1"])
+    if([[job valueForKey:@"job_requires_telecommuting"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         [swtCommuting setOn:YES];
     }

@@ -122,11 +122,11 @@
     [[cell textLabel] setText:[job valueForKey:@"job_title"]];
                              
     NSString *job_company_name = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_company_name"]];
-        job_company_name = [job_company_name length] > 19 ? [NSString stringWithFormat:@"%@..", [job_company_name substringToIndex:19]] : job_company_name; // More than 26 characters for company name pushes date out of cell, so cut it down
+        job_company_name = [job_company_name length] > 23 ? [NSString stringWithFormat:@"%@..", [job_company_name substringToIndex:23]] : job_company_name; // More than 26 characters for company name pushes date out of cell, so cut it down
     NSString *job_post_date = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_post_date"]]; // Returns date and time
         job_post_date = [job_post_date substringToIndex:10]; // Cut time from string
     
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Posted by %@ on %@", job_company_name, job_post_date]] ;
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"by %@ on %@", job_company_name, job_post_date]] ;
     
     // Cell text formatting
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
