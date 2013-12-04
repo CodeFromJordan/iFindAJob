@@ -62,20 +62,24 @@
     if([[job valueForKey:@"job_has_relocation_assistance"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         [txtRelocationSwitch setText:@"YES"];
+        [txtRelocationSwitch setTextColor:[ExtraMethods getColorFromHexString:@"00FF00"]];
     }
     else
     {
         [txtRelocationSwitch setText:@"NO"];
+        [txtRelocationSwitch setTextColor:[ExtraMethods getColorFromHexString:@"FF0000"]];
     }
     
     // Commuting
     if([[job valueForKey:@"job_requires_telecommuting"] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         [txtCommutingSwitch setText:@"YES"];
+        [txtCommutingSwitch setTextColor:[ExtraMethods getColorFromHexString:@"00FF00"]];
     }
     else
     {
         [txtCommutingSwitch setText:@"NO"];
+        [txtCommutingSwitch setTextColor:[ExtraMethods getColorFromHexString:@"FF0000"]];
     }
     
     // Setup web opening button
