@@ -32,6 +32,20 @@
 {
     [super viewDidLoad];
     
+    // Setup animation objects
+    imageNames = @[@"search_anim_1.png", @"search_anim_2.png", @"search_anim_3.png", @"search_anim_4.png", @"search_anim_3.png", @"search_anim_2.png"];
+    images = [[NSMutableArray alloc] init];
+    for(int i = 0; i < imageNames.count; i++)
+    {
+        [images addObject:[UIImage imageNamed:[imageNames objectAtIndex:i]]];
+    }
+    animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(140, 180, 35, 35)];
+    animationImageView.animationImages = images;
+    animationImageView.animationDuration = 1.5;
+    animationImageView.animationRepeatCount = 4;
+    
+    [self.view addSubview:animationImageView];
+    
     // Setup Search Bar for users
     [searchBar setPlaceholder:@"Enter job keyword.."];
     [searchBar setDelegate:self];
@@ -136,7 +150,7 @@
         else{
             [searchBar setText:[NSString stringWithFormat:@"'%@' jobs found in these locations..", searchTerm]];
         }
-        
+
         [[self tableView] reloadData];
     } else { // Serious error, show error message
         [searchResults removeAllObjects];
@@ -149,6 +163,7 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)sb {
     // Retrieve search term for search bar
     NSString *searchTerm = [searchBar text];
+    [animationImageView startAnimating];
     
     LocationSearchService *service = [[LocationSearchService alloc] init];
     [service setSearchTerm:searchTerm];
@@ -196,7 +211,14 @@
     NSDictionary *location = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [locations objectAtIndex:[indexPath row]];
     NSNumber *jobCount = [location valueForKey:@"job_count"];
     NSString *jobString = ([jobCount integerValue] > 1) ? @"jobs" : @"job";
-    [[cell textLabel] setText:[location valueForKey:@"job_location"]];
+    if(isSearching) // Only show the search term in the cell when the user is not searching
+    {
+        [[cell textLabel] setText:[location valueForKey:@"job_location"]]; 
+    }
+    else
+    {
+      [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%@)", [location valueForKey:@"job_location"], [location valueForKey:@"job_keyword"]]];  
+    }
     [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ reported %@", [location valueForKey:@"job_count"], jobString]];
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
     cell.detailTextLabel.textColor = [ExtraMethods getColorFromHexString:@"000000"];

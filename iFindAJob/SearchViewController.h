@@ -19,6 +19,10 @@
     NSMutableArray *searchResults;
     
     NSOperationQueue *serviceQueue;
+    
+    NSArray *imageNames;
+    NSMutableArray *images;
+    UIImageView *animationImageView;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

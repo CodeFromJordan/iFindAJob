@@ -80,6 +80,7 @@
     
     // Setup web opening button
     [btnOpenBrowser addTarget:self action:@selector(openURLInSafari:) forControlEvents:UIControlEventTouchUpInside];
+    [btnOpenBrowser setTitleColor:[ExtraMethods getColorFromHexString:@"7D3A0A"] forState:UIControlStateNormal];
 }
 
 - (IBAction)openURLInSafari:(UIButton *)sender
