@@ -79,7 +79,7 @@
                 [job_info setValue:[job valueForKey:@"relocation_assistance"] forKey:@"job_has_relocation_assistance"];
                 [job_info setValue:[job valueForKey:@"telecommuting"] forKey:@"job_requires_telecommuting"];
                 
-                // Add movie info to main list
+                // Add job info to main list
                 if(![[searchResults valueForKey:@"job_id"] containsObject:idOfJobToAdd]) // Only add location to search results array if it doesn't already exist in it
                 {
                     [searchResults addObject:job_info];

@@ -52,8 +52,8 @@
     }
     animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(140, 180, 35, 35)];
     animationImageView.animationImages = images;
-    animationImageView.animationDuration = 1.5;
-    animationImageView.animationRepeatCount = 4;
+    animationImageView.animationDuration = 0.7;
+    animationImageView.animationRepeatCount = 100;
     
     [self.view addSubview:animationImageView];
     
@@ -138,9 +138,9 @@
                 [location_info setValue:[location valueForKey:@"name"] forKey:@"job_location"];
                 [location_info setValue:[location valueForKey:@"count"] forKey:@"job_count"];
                 [location_info setValue:searchTerm forKey:@"job_keyword"];
-                
-                // Add movie info to main list
-                // Search result location cannot be duplicate in searchResults OR locations, it also must actually have a ity
+
+                // Add location info to main list
+                // Search result location cannot be duplicate in searchResults OR locations, it also must actually have a city
                 if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"name"] isEqual:nil] && ![[locations valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd]) // Only add location to search results array if it doesn't already exist in it
                 {
                     [searchResults addObject:location_info];
@@ -150,6 +150,7 @@
         
         // If there are no results found
         if ([searchResults count] == 0) {
+            [animationImageView stopAnimating]; // Force animation to go away
             [searchBar setText:[NSString stringWithFormat:@"No results for '%@'..", searchTerm]];
         }
         else{
@@ -159,6 +160,7 @@
         [[self tableView] reloadData];
     } else { // Serious error, show error message
         [searchResults removeAllObjects];
+        [animationImageView stopAnimating]; // Force animation to go away
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
         [[self tableView] reloadData];
@@ -216,13 +218,14 @@
     NSDictionary *location = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [locations objectAtIndex:[indexPath row]];
     NSNumber *jobCount = [location valueForKey:@"job_count"];
     NSString *jobString = ([jobCount integerValue] > 1) ? @"jobs" : @"job";
-    if(isSearching) // Only show the search term in the cell when the user is not searching
+    if(isSearching) // Only when user is searching
     {
-        [[cell textLabel] setText:[location valueForKey:@"job_location"]]; 
+        [animationImageView stopAnimating]; // Force animation to go away
+        [[cell textLabel] setText:[location valueForKey:@"job_location"]]; // Populate cells with search results
     }
     else
     {
-      [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%@)", [location valueForKey:@"job_location"], [location valueForKey:@"job_keyword"]]];  
+      [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%@)", [location valueForKey:@"job_location"], [location valueForKey:@"job_keyword"]]]; // Populate cells with saved results
     }
     [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ reported %@", [location valueForKey:@"job_count"], jobString]];
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
@@ -242,7 +245,7 @@
         [locations removeObject:location];
         
         // Call save to core data method for locations
-        [self deleteLocationFromPersistance:[location valueForKey:@"job_location_id"]];
+        [self deleteLocationFromPersistance:[location valueForKey:@"job_location_id"] withSearchTerm:[location valueForKey:@"job_keyword"]];
         
         // Trigger remove animation on table
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -316,14 +319,14 @@
     [super viewWillAppear:animated];
 }
 
--(void)deleteLocationFromPersistance:(NSString*)idOfLocationToDelete {
+-(void)deleteLocationFromPersistance:(NSString*)idOfLocationToDelete withSearchTerm:(NSString*)searchTerm{
     // Core data
     // Setup fetch request and entity objects
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *deleteQuery = [NSPredicate predicateWithFormat:@"id == %@", idOfLocationToDelete];
+    NSPredicate *deleteQuery = [NSPredicate predicateWithFormat:@"id == %@ AND keyword == %@", idOfLocationToDelete, searchTerm]; // Must match location AND keyword
     [fetchRequest setPredicate:deleteQuery]; // Query match predicate
     
     NSError *fetchError; // Save for fetch operation
