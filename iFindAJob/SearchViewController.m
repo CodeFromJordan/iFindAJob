@@ -10,6 +10,10 @@
 #import "JobListingViewController.h"
 #import "ExtraMethods.h"
 
+#import "Location.h"
+#import "AppDelegate.h"
+
+
 @interface SearchViewController ()
 
 @end
@@ -17,6 +21,9 @@
 @implementation SearchViewController
 
 @synthesize searchBar;
+
+// Used for core data
+@synthesize managedObjectContext;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,6 +38,10 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Setup instance of app delegate for core data
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
     // Setup animation objects
     imageNames = @[@"search_anim_1.png", @"search_anim_2.png", @"search_anim_3.png", @"search_anim_4.png", @"search_anim_3.png", @"search_anim_2.png"];
@@ -58,15 +69,9 @@
     // Set up service queue
     serviceQueue = [[NSOperationQueue alloc] init];
     [serviceQueue setMaxConcurrentOperationCount:1];
-    
-    // Restore saved job list
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString*documentsDirectory = [paths objectAtIndex:0];
-    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
-    locations = [[NSMutableArray alloc] initWithContentsOfFile: yourArrayFileName];
-    if(locations == nil) {
-        locations = [NSMutableArray arrayWithCapacity:0];
-    }
+        
+    // Restore saved job list from core data
+    [self readAllLocationsFromPersistance];
     
     // Sort films
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
@@ -235,12 +240,11 @@
         
         // Remove from list and save changes
         [locations removeObject:location];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
-        [locations writeToFile:yourArrayFileName atomically:YES];
         
-        // Triffer remove animation on table
+        // Call save to core data method for locations
+        [self deleteLocationFromPersistance:[location valueForKey:@"job_location_id"]];
+        
+        // Trigger remove animation on table
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
 }
@@ -292,11 +296,8 @@
             NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
             [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
             
-            // Store data
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
-            [locations writeToFile:yourArrayFileName atomically:YES];
+            // Call save to core data method for location
+            [self saveLocationToPersistance:location];
         }
     } else {
         // Use for interaction with film list
@@ -312,13 +313,86 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    // Save films list once returned to list view
     [super viewWillAppear:animated];
+}
+
+-(void)deleteLocationFromPersistance:(NSString*)idOfLocationToDelete {
+    // Core data
+    // Setup fetch request and entity objects
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
-    [locations writeToFile:yourArrayFileName atomically:YES];
+    NSPredicate *deleteQuery = [NSPredicate predicateWithFormat:@"id == %@", idOfLocationToDelete];
+    [fetchRequest setPredicate:deleteQuery]; // Query match predicate
+    
+    NSError *fetchError; // Save for fetch operation
+    NSArray *fetchedProducts = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+
+    for (NSManagedObject *product in fetchedProducts) { // Loop through each matched object and delete it
+        [managedObjectContext deleteObject:product];
+    }
+    
+    // Save/error handling
+    NSError *deleteError;
+    if(![managedObjectContext save:&fetchError]) {
+        NSLog(@"Failed to delete record: %@", [deleteError localizedDescription]);
+    }
+}
+
+-(void)readAllLocationsFromPersistance { // Reads all locations from data persistence
+    // Original restore saved job list from xml
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString*documentsDirectory = [paths objectAtIndex:0];
+    //NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+    //locations = [[NSMutableArray alloc] initWithContentsOfFile: yourArrayFileName];
+    //if(locations == nil) {
+    //locations = [NSMutableArray arrayWithCapacity:0];
+    //}
+    
+    // Core data
+    // Setup fetch request and entity objects
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *fetchError; // Error for fetch operation
+    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchError]; // Read all location object from core data
+    
+    for(Location *location in fetchedObjects) { // For each location object in core data
+        NSMutableDictionary *locationToAdd = [[NSMutableDictionary alloc] init]; // Dictionary to temporarily store read in items
+        
+        // Take each read-in value and put them into dictionary
+        [locationToAdd setValue:[location valueForKey:@"id"] forKey:@"job_location_id"];
+        [locationToAdd setValue:[location valueForKey:@"name"] forKey:@"job_location"];
+        [locationToAdd setValue:[location valueForKey:@"count"] forKey:@"job_count"];
+        [locationToAdd setValue:[location valueForKey:@"keyword"] forKey:@"job_keyword"];
+        
+        [locations addObject:locationToAdd]; // Add dictionary to locations array
+    }
+}
+
+-(void)saveLocationToPersistance:(NSDictionary*)locationToSave { // Saves all locations into data persietence
+    // Original save to XML
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];
+    //NSString *yourArrayFileName = [documentsDirectory stringByAppendingPathComponent:@"locations.xml"];
+    //[locations writeToFile:yourArrayFileName atomically:YES];
+
+    // Core data
+    // Create managed object
+    Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:managedObjectContext];
+    
+    // Read values from location dictionary
+    [location setValue:[locationToSave valueForKey:@"job_location_id"] forKey:@"id"];
+    [location setValue:[locationToSave valueForKey:@"job_location"] forKey:@"name"];
+    [location setValue:[locationToSave valueForKey:@"job_count"] forKey:@"count"];
+    [location setValue:[locationToSave valueForKey:@"job_keyword"] forKey:@"keyword"];
+    
+    // Save/error handling
+    NSError *saveError; // Error for save operation
+    if(![managedObjectContext save:&saveError]) {
+        NSLog(@"Failed to save record: %@", [saveError localizedDescription]);
+    }
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

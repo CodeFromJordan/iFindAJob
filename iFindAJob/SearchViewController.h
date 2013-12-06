@@ -26,4 +26,7 @@
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
+// Properties for core data
+@property(nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end

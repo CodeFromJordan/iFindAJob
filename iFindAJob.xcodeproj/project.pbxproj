@@ -13,6 +13,8 @@
 		F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C9183B9CB3006CE9FD /* home_unselected.png */; };
 		F508B5E9184E0BEB00946C41 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F508B5E7184E0BEB00946C41 /* JobDetailViewController.m */; };
 		F508B5EA184E0BEB00946C41 /* JobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F508B5E8184E0BEB00946C41 /* JobDetailViewController.xib */; };
+		F52012311851F866004F34AD /* iFindAJob.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */; };
+		F52012341851F924004F34AD /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = F52012331851F924004F34AD /* Location.m */; };
 		F556628B183A5E1A008FAA06 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628A183A5E1A008FAA06 /* UIKit.framework */; };
 		F556628D183A5E1A008FAA06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628C183A5E1A008FAA06 /* Foundation.framework */; };
 		F556628F183A5E1A008FAA06 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628E183A5E1A008FAA06 /* CoreGraphics.framework */; };
@@ -53,6 +55,9 @@
 		F508B5E6184E0BEB00946C41 /* JobDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
 		F508B5E7184E0BEB00946C41 /* JobDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
 		F508B5E8184E0BEB00946C41 /* JobDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailViewController.xib; sourceTree = "<group>"; };
+		F52012301851F866004F34AD /* iFindAJob.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFindAJob.xcdatamodel; sourceTree = "<group>"; };
+		F52012321851F924004F34AD /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		F52012331851F924004F34AD /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		F5566287183A5E1A008FAA06 /* iFindAJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFindAJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F556628A183A5E1A008FAA06 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F556628C183A5E1A008FAA06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -216,6 +221,9 @@
 				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
 				F593D38B184CB88700668841 /* Job.h */,
 				F593D38C184CB88700668841 /* Job.m */,
+				F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */,
+				F52012321851F924004F34AD /* Location.h */,
+				F52012331851F924004F34AD /* Location.m */,
 			);
 			name = Includes;
 			sourceTree = "<group>";
@@ -324,6 +332,8 @@
 				F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */,
 				F5B40996184CFC8300A5F0B3 /* JobSearchService.m in Sources */,
 				F508B5E9184E0BEB00946C41 /* JobDetailViewController.m in Sources */,
+				F52012311851F866004F34AD /* iFindAJob.xcdatamodeld in Sources */,
+				F52012341851F924004F34AD /* Location.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +451,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F52012301851F866004F34AD /* iFindAJob.xcdatamodel */,
+			);
+			currentVersion = F52012301851F866004F34AD /* iFindAJob.xcdatamodel */;
+			path = iFindAJob.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F556627F183A5E1A008FAA06 /* Project object */;
 }

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12F37</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
@@ -54,7 +54,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIScrollEnabled">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">Hello, and welcome to the iFindAJob iOS application. Please click the 'Find Jobs' tab at the bottom of the window to begin searching for IT jobs around the globe.</string>
+						<string key="IBUIText">Hello, and welcome to the iFindAJob iOS application. Please click the 'Find Jobs' tab at the bottom of the window to begin searching for I.T. jobs around the globe.</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
