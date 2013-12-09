@@ -102,6 +102,8 @@
 }
 
 - (void)searchDone:(id)sender {
+    [animationImageView stopAnimating]; // Get rid of animation
+    
     // Clear search text
     [searchBar setText:@""];
     
@@ -141,9 +143,34 @@
 
                 // Add location info to main list
                 // Search result location cannot be duplicate in searchResults OR locations, it also must actually have a city
-                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"name"] isEqual:nil] && ![[locations valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd]) // Only add location to search results array if it doesn't already exist in it
-                {
-                    [searchResults addObject:location_info];
+                if(![[searchResults valueForKey:@"job_location_id"] containsObject:idOfLocationToAdd] && ![[location valueForKey:@"name"] isEqual:nil]) // Only add location to search results array if it doesn't already exist in it
+                {                    
+                    if([locations count] > 0) // If locations actually contains an item
+                    {
+                        // Store all locations and keywords which currently exist
+                        NSArray *locationsArray = [locations valueForKey:@"job_location_id"];
+                        NSArray *keywordsArray = [locations valueForKey:@"job_keyword"];
+                        
+                        bool pairExists = NO; // Store if pair already exists or not
+                        
+                        for(int i = 0; i < [locationsArray count]; i++) // Loop through each pair
+                        {
+                            // If location exists with keyword to be searched
+                            if([[locationsArray objectAtIndex:i] isEqualToString:idOfLocationToAdd] && [[keywordsArray objectAtIndex:i] isEqualToString:searchTerm])
+                            {
+                                pairExists = YES; // Pair does exists
+                            }
+                        }
+                        
+                        if(pairExists == NO) // If loop reaches end without finding already existing pair
+                        {
+                            [searchResults addObject:location_info]; // Add search result to be shown
+                        }
+                    }
+                    else
+                    {
+                        [searchResults addObject:location_info]; // Add search result to be shown
+                    }
                 }
             }
         }
@@ -157,13 +184,13 @@
             [searchBar setText:[NSString stringWithFormat:@"'%@' jobs found in these locations..", searchTerm]];
         }
 
-        [[self tableView] reloadData];
+        [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } else { // Serious error, show error message
         [searchResults removeAllObjects];
         [animationImageView stopAnimating]; // Force animation to go away
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
-        [[self tableView] reloadData];
+        [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     }
 }
 
@@ -216,18 +243,17 @@
     }
     
     NSDictionary *location = isSearching ? [searchResults objectAtIndex:[indexPath row]] : [locations objectAtIndex:[indexPath row]];
-    NSNumber *jobCount = [location valueForKey:@"job_count"];
-    NSString *jobString = ([jobCount integerValue] > 1) ? @"jobs" : @"job";
     if(isSearching) // Only when user is searching
     {
         [animationImageView stopAnimating]; // Force animation to go away
         [[cell textLabel] setText:[location valueForKey:@"job_location"]]; // Populate cells with search results
+        [[cell detailTextLabel] setText:@""]; // Clear detail text label
     }
     else
     {
-      [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%@)", [location valueForKey:@"job_location"], [location valueForKey:@"job_keyword"]]]; // Populate cells with saved results
+        [[cell textLabel] setText:[NSString stringWithFormat:@"%@", [[location valueForKey:@"job_keyword"] uppercaseString]]]; // Populate cells with saved results in upper case
+        [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@", [location valueForKey:@"job_location"]]];
     }
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ reported %@", [location valueForKey:@"job_count"], jobString]];
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
     cell.detailTextLabel.textColor = [ExtraMethods getColorFromHexString:@"000000"];
     
