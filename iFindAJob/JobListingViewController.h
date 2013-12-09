@@ -10,7 +10,6 @@
 #import "ServiceDelegate.h"
 
 @interface JobListingViewController : UITableViewController <ServiceDelegate> {
-    NSMutableArray *jobs;
     NSMutableArray *searchResults;
     
     NSOperationQueue *serviceQueue;

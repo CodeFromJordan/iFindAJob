@@ -33,7 +33,6 @@
     [super viewDidLoad];
     
     // Create job and search result array
-    jobs = [NSMutableArray arrayWithCapacity:100];
     searchResults = [NSMutableArray arrayWithCapacity:100];
     
     // Set up service queue

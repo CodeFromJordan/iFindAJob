@@ -51,8 +51,8 @@
     // Description box formatting
     [txtJobDescription setOpaque:NO]; // Make background color show
     [txtJobDescription setBackgroundColor:[ExtraMethods getColorFromHexString:@"F0F0F0"]]; // Set the background color to light grey
-    [[txtJobDescription layer] setBorderColor:[[UIColor grayColor] CGColor]]; // Set border to grey
-    [[txtJobDescription layer] setBorderWidth:2]; // Border 1px width
+    [[txtJobDescription layer] setBorderColor:[[UIColor brownColor] CGColor]]; // Set border to grey
+    [[txtJobDescription layer] setBorderWidth:1]; // Border 1px width
     
     // Setup text boxes
     [txtJobTitle setText:[job valueForKey:@"job_title"]];
