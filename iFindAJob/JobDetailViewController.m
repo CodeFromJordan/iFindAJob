@@ -48,14 +48,17 @@
     
     [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add share button to left side of screen
     
-    [[txtJobDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[txtJobDescription layer] setBorderWidth:1];
+    // Description box formatting
+    [txtJobDescription setOpaque:NO]; // Make background color show
+    [txtJobDescription setBackgroundColor:[ExtraMethods getColorFromHexString:@"F0F0F0"]]; // Set the background color to light grey
+    [[txtJobDescription layer] setBorderColor:[[UIColor grayColor] CGColor]]; // Set border to grey
+    [[txtJobDescription layer] setBorderWidth:2]; // Border 1px width
     
     // Setup text boxes
     [txtJobTitle setText:[job valueForKey:@"job_title"]];
     [txtJobCompany setText:[NSString stringWithFormat:@"for %@", [job valueForKey:@"job_company_name"]]];
     [txtJobPostDate setText:[NSString stringWithFormat:@"Posted: %@", [job valueForKey:@"job_post_date"]]];
-    [txtJobDescription setText:[self stripHTMLFromString:[job valueForKey:@"job_description"]]];
+    [txtJobDescription loadHTMLString:[job valueForKey:@"job_description"] baseURL:nil];
     
     // Setup switches
     // Relocation assistance

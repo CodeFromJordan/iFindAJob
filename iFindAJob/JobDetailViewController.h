@@ -16,9 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtJobPostDate;
 @property (weak, nonatomic) IBOutlet UILabel *txtRelocationSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *txtCommutingSwitch;
-@property (weak, nonatomic) IBOutlet UITextView *txtJobDescription;
 @property (weak, nonatomic) IBOutlet UIButton *btnOpenBrowser;
-
+@property (weak, nonatomic) IBOutlet UIWebView *txtJobDescription;
 @property (nonatomic, retain) NSDictionary *job;
 
 @end

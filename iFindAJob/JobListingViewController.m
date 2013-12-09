@@ -88,9 +88,6 @@
         }
         
         [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-        
-        [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-        
     } else { // Serious error, show error message
         [searchResults removeAllObjects];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];

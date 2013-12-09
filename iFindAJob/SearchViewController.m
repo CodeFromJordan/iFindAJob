@@ -98,7 +98,7 @@
     
     // Force Table to reload and redraw
     [searchResults removeAllObjects];
-    [[self tableView] reloadData];
+    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 - (void)searchDone:(id)sender {
@@ -119,7 +119,7 @@
     [searchResults removeAllObjects];
     
     // Force table to reload and redraw
-    [[self tableView] reloadData];
+    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 - (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString*)searchTerm {
@@ -206,7 +206,7 @@
     
     [searchResults removeAllObjects];
     [searchBar setText:[NSString stringWithFormat:@"Searching for '%@'..", searchTerm]];
-    [[self tableView] reloadData];
+    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     
     // Hide the Keyboard from the searchBar
     [searchBar resignFirstResponder];
@@ -319,7 +319,7 @@
             [searchResults removeAllObjects];
             
             // Force table to reload and redraw
-            [[self tableView] reloadData];
+            [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
             
             // Sort films
             NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
