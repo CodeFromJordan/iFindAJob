@@ -18,8 +18,6 @@
 		F51B71211857330C0075FCD5 /* SavedJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51B711F1857330C0075FCD5 /* SavedJobViewController.xib */; };
 		F51B7124185738200075FCD5 /* shortlist_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7122185738200075FCD5 /* shortlist_unselected.png */; };
 		F51B7125185738200075FCD5 /* shortlist_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7123185738200075FCD5 /* shortlist_selected.png */; };
-		F51B7134185756850075FCD5 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7132185756850075FCD5 /* twitter.png */; };
-		F51B7135185756850075FCD5 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7133185756850075FCD5 /* facebook.png */; };
 		F52012311851F866004F34AD /* iFindAJob.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */; };
 		F52012341851F924004F34AD /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = F52012331851F924004F34AD /* Location.m */; };
 		F556628B183A5E1A008FAA06 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628A183A5E1A008FAA06 /* UIKit.framework */; };
@@ -68,8 +66,6 @@
 		F51B711F1857330C0075FCD5 /* SavedJobViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedJobViewController.xib; sourceTree = "<group>"; };
 		F51B7122185738200075FCD5 /* shortlist_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shortlist_unselected.png; sourceTree = "<group>"; };
 		F51B7123185738200075FCD5 /* shortlist_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shortlist_selected.png; sourceTree = "<group>"; };
-		F51B7132185756850075FCD5 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
-		F51B7133185756850075FCD5 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		F52012301851F866004F34AD /* iFindAJob.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFindAJob.xcdatamodel; sourceTree = "<group>"; };
 		F52012321851F924004F34AD /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		F52012331851F924004F34AD /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
@@ -134,8 +130,6 @@
 		F506A4C1183B94FA006CE9FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F51B7132185756850075FCD5 /* twitter.png */,
-				F51B7133185756850075FCD5 /* facebook.png */,
 				F51B7122185738200075FCD5 /* shortlist_unselected.png */,
 				F51B7123185738200075FCD5 /* shortlist_selected.png */,
 				F59A5C6D184F75BD00638DD8 /* search_anim_4.png */,
@@ -335,8 +329,6 @@
 				F51B71211857330C0075FCD5 /* SavedJobViewController.xib in Resources */,
 				F51B7124185738200075FCD5 /* shortlist_unselected.png in Resources */,
 				F51B7125185738200075FCD5 /* shortlist_selected.png in Resources */,
-				F51B7134185756850075FCD5 /* twitter.png in Resources */,
-				F51B7135185756850075FCD5 /* facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

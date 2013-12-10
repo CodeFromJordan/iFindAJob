@@ -56,14 +56,9 @@
     
     // Setup navigation bar
     // Setup buttons
-    UIImage *twitterImage = [UIImage imageNamed:@"twitter.png"];
-    UIImage *facebookImage = [UIImage imageNamed:@"facebook.png"];
-    twitterButton = [[UIBarButtonItem alloc] initWithImage:twitterImage style:UIBarButtonItemStylePlain target:self action:@selector(postJobToTwitter:)]; // Create the button
-    facebookButton = [[UIBarButtonItem alloc] initWithImage:facebookImage style:UIBarButtonItemStylePlain target:self action:@selector(postJobToFacebook:)]; // Create the button
+    shareButton = [[UIBarButtonItem alloc] initWithTitle:@"Share Job" style:UIBarButtonItemStylePlain target:self action:@selector(postJobToSocial:)]; // Create the button
     
-    NSArray *buttonArray = [[NSArray alloc] initWithObjects:twitterButton, facebookButton, nil];
-    
-    [self.navigationController.topViewController.navigationItem setRightBarButtonItems:buttonArray]; // Add Twitter and Facebook buttons to left side of screen
+    [self.navigationController.topViewController.navigationItem setRightBarButtonItem:shareButton]; // Add Twitter and Facebook buttons to left side of screen
     
     // Description box formatting
     [txtJobDescription setOpaque:NO]; // Make background color show
@@ -169,34 +164,13 @@
     }
 }
 
-- (IBAction)postJobToTwitter:(UIButton *)sender
+- (IBAction)postJobToSocial:(UIButton *)sender
 {
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    {
-        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"iFindAJob iOS: Want to be an '%@'? Check out: %@", [job valueForKey:@"job_title"], [job valueForKey:@"job_post_url"]]];
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Tweet" message:@"Unable to post Tweet right now. Please ensure that you have an internet connection and that the device has a Twitter account registered." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-- (IBAction)postJobToFacebook:(UIButton *)sender
-{
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        
-        [controller setInitialText:[NSString stringWithFormat:@"iFindAJob iOS: Want to be an '%@'? Check out: %@", [job valueForKey:@"job_title"], [job valueForKey:@"job_post_url"]]];
-        [self presentViewController:controller animated:YES completion:Nil];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Post to Facebook" message:@"Unable to post to Facebook right now. Please ensure that you have an internet connection and that the device has a Facebook account registered." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-    }
+    NSString *texttoshare = [NSString stringWithFormat:@"iFindAJob iOS: Want to be an '%@'? Check out: %@", [job valueForKey:@"job_title"], [job valueForKey:@"job_post_url"]]; //this is your text string to share
+    NSArray *activityItems = @[texttoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
