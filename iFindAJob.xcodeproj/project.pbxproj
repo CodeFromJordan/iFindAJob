@@ -36,6 +36,7 @@
 		F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662B2183A5EFA008FAA06 /* SearchViewController.m */; };
 		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
 		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
+		F58613FA185773630072D956 /* MapDownloadService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58613F9185773630072D956 /* MapDownloadService.m */; };
 		F58F6A32183CCB3D002F6678 /* LocationSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58F6A31183CCB3D002F6678 /* LocationSearchService.m */; };
 		F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D399184CD8A600668841 /* JobListingViewController.m */; };
 		F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D39A184CD8A600668841 /* JobListingViewController.xib */; };
@@ -92,6 +93,8 @@
 		F55662B3183A5EFA008FAA06 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		F55662BC183A5F33008FAA06 /* ExtraMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraMethods.h; sourceTree = "<group>"; };
 		F55662BD183A5F33008FAA06 /* ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraMethods.m; sourceTree = "<group>"; };
+		F58613F8185773630072D956 /* MapDownloadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDownloadService.h; sourceTree = "<group>"; };
+		F58613F9185773630072D956 /* MapDownloadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDownloadService.m; sourceTree = "<group>"; };
 		F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDelegate.h; sourceTree = "<group>"; };
 		F58F6A30183CCB3D002F6678 /* LocationSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchService.h; sourceTree = "<group>"; };
 		F58F6A31183CCB3D002F6678 /* LocationSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchService.m; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				F58F6A31183CCB3D002F6678 /* LocationSearchService.m */,
 				F5B40994184CFC8300A5F0B3 /* JobSearchService.h */,
 				F5B40995184CFC8300A5F0B3 /* JobSearchService.m */,
+				F58613F8185773630072D956 /* MapDownloadService.h */,
+				F58613F9185773630072D956 /* MapDownloadService.m */,
 			);
 			name = "Web Services";
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 				F52012341851F924004F34AD /* Location.m in Sources */,
 				F51B711C185732D00075FCD5 /* Job.m in Sources */,
 				F51B71201857330C0075FCD5 /* SavedJobViewController.m in Sources */,
+				F58613FA185773630072D956 /* MapDownloadService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

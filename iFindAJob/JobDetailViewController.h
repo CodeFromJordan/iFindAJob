@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceDelegate.h"
 
-@interface JobDetailViewController : UIViewController {
+@interface JobDetailViewController : UIViewController <ServiceDelegate> {
     UIBarButtonItem* shareButton;
+    NSOperationQueue *serviceQueue;
+    UIImage *mapImage;
 }
 @property (weak, nonatomic) IBOutlet UILabel *txtJobTitle;
 @property (weak, nonatomic) IBOutlet UILabel *txtJobCompany;
@@ -20,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveJob;
 @property (weak, nonatomic) IBOutlet UIWebView *txtJobDescription;
 @property (nonatomic, retain) NSDictionary *job;
+@property (strong, nonatomic) IBOutlet UIImageView *imgJobMap;
 
 // Properties for core data
 @property(nonatomic, retain) NSManagedObjectContext *managedObjectContext;

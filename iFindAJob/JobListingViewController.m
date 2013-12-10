@@ -45,7 +45,6 @@
     [service setLocationId:[location valueForKey:@"job_location_id"]];
     [service setDelegate:self];
     [serviceQueue addOperation:service];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +70,7 @@
                 [job_info setValue:[job valueForKey:@"id"] forKey:@"job_id"];
                 [job_info setValue:[job valueForKey:@"title"] forKey:@"job_title"];
                 [job_info setValue:[[job valueForKey:@"company"] valueForKey:@"name"] forKey:@"job_company_name"];
+                [job_info setValue:[[[job valueForKey:@"company"] valueForKey:@"location"] valueForKey:@"city"] forKey:@"job_city"];
                 [job_info setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
                 // Only used for detail view
                 [job_info setValue:[job valueForKey:@"description"] forKey:@"job_description"];

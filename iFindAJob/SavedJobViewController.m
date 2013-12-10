@@ -170,6 +170,7 @@
         [jobToAdd setValue:[job valueForKey:@"id"] forKey:@"job_id"];
         [jobToAdd setValue:[job valueForKey:@"title"] forKey:@"job_title"];
         [jobToAdd setValue:[job valueForKey:@"company_name"] forKey:@"job_company_name"];
+        [jobToAdd setValue:[job valueForKey:@"city"] forKey:@"job_city"];
         [jobToAdd setValue:[job valueForKey:@"post_date"] forKey:@"job_post_date"];
         [jobToAdd setValue:[job valueForKey:@"relocation_assistance"] forKey:@"job_has_relocation_assistance"];
         [jobToAdd setValue:[job valueForKey:@"requires_commuting"] forKey:@"job_requires_commuting"];

@@ -13,6 +13,8 @@
 #import "Job.h"
 #import "AppDelegate.h"
 
+#import "MapDownloadService.h"
+
 #import <QuartzCore/QuartzCore.h> 
 
 @interface JobDetailViewController ()
@@ -29,6 +31,7 @@
 @synthesize txtJobDescription;
 @synthesize btnOpenBrowser;
 @synthesize btnSaveJob;
+@synthesize imgJobMap;
 
 @synthesize job;
 @synthesize openedFromSavedJobs;
@@ -53,6 +56,10 @@
     // Setup instance of app delegate for core data
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    // Setup map service queue
+    serviceQueue = [[NSOperationQueue alloc] init];
+    [serviceQueue setMaxConcurrentOperationCount:1];
     
     // Setup navigation bar
     // Setup buttons
@@ -105,10 +112,26 @@
     [btnSaveJob addTarget:self action:@selector(saveJobToPersistance:) forControlEvents:UIControlEventTouchUpInside];
     [btnSaveJob setTitleColor:[ExtraMethods getColorFromHexString:@"7D3A0A"] forState:UIControlStateNormal];
     
+    // Download map image
+    MapDownloadService *service = [[MapDownloadService alloc] init];
+    [service setCityName:[job valueForKey:@"job_city"]];
+    [service setDelegate:self];
+    [serviceQueue addOperation:service];
+    
     if(openedFromSavedJobs) // If the job was opened from the saved jobs list
     {
         [btnSaveJob setHidden:YES]; // Don't let user click save because job is already saved
     }
+}
+
+- (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString*)searchTerm {
+    // Set map image
+    imgJobMap = [imgJobMap init];                 
+    [imgJobMap setImage:[service mapImage]];
+    
+    // Map image formatting
+    [[imgJobMap layer] setBorderColor:[[UIColor brownColor] CGColor]];
+    [[imgJobMap layer] setBorderWidth:1];
 }
 
 - (IBAction)openURLInSafari:(UIButton *)sender
@@ -127,6 +150,7 @@
         [jobToSave setValue:[job valueForKey:@"job_id"] forKey:@"id"];
         [jobToSave setValue:[job valueForKey:@"job_title"] forKey:@"title"];
         [jobToSave setValue:[job valueForKey:@"job_company_name"] forKey:@"company_name"];
+        [jobToSave setValue:[job valueForKey:@"job_city"] forKey:@"city"];
         [jobToSave setValue:[job valueForKey:@"job_post_date"] forKey:@"post_date"];
         [jobToSave setValue:[job valueForKey:@"job_has_relocation_assistance"] forKey:@"relocation_assistance"];
         [jobToSave setValue:[job valueForKey:@"job_requires_telecommuting"] forKey:@"requires_commuting"];
