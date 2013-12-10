@@ -17,7 +17,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtRelocationSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *txtCommutingSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *btnOpenBrowser;
+@property (weak, nonatomic) IBOutlet UIButton *btnSaveJob;
 @property (weak, nonatomic) IBOutlet UIWebView *txtJobDescription;
 @property (nonatomic, retain) NSDictionary *job;
+
+// Properties for core data
+@property(nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property bool openedFromSavedJobs;
 
 @end

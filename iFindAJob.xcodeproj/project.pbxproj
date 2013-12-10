@@ -13,6 +13,11 @@
 		F506A4CD183B9CB3006CE9FD /* home_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F506A4C9183B9CB3006CE9FD /* home_unselected.png */; };
 		F508B5E9184E0BEB00946C41 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F508B5E7184E0BEB00946C41 /* JobDetailViewController.m */; };
 		F508B5EA184E0BEB00946C41 /* JobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F508B5E8184E0BEB00946C41 /* JobDetailViewController.xib */; };
+		F51B711C185732D00075FCD5 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = F51B711B185732D00075FCD5 /* Job.m */; };
+		F51B71201857330C0075FCD5 /* SavedJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51B711E1857330C0075FCD5 /* SavedJobViewController.m */; };
+		F51B71211857330C0075FCD5 /* SavedJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51B711F1857330C0075FCD5 /* SavedJobViewController.xib */; };
+		F51B7124185738200075FCD5 /* shortlist_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7122185738200075FCD5 /* shortlist_unselected.png */; };
+		F51B7125185738200075FCD5 /* shortlist_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F51B7123185738200075FCD5 /* shortlist_selected.png */; };
 		F52012311851F866004F34AD /* iFindAJob.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */; };
 		F52012341851F924004F34AD /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = F52012331851F924004F34AD /* Location.m */; };
 		F556628B183A5E1A008FAA06 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F556628A183A5E1A008FAA06 /* UIKit.framework */; };
@@ -32,7 +37,6 @@
 		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
 		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
 		F58F6A32183CCB3D002F6678 /* LocationSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58F6A31183CCB3D002F6678 /* LocationSearchService.m */; };
-		F593D38D184CB88700668841 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D38C184CB88700668841 /* Job.m */; };
 		F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D399184CD8A600668841 /* JobListingViewController.m */; };
 		F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D39A184CD8A600668841 /* JobListingViewController.xib */; };
 		F59A5C71184F75BD00638DD8 /* search_anim_4.png in Resources */ = {isa = PBXBuildFile; fileRef = F59A5C6D184F75BD00638DD8 /* search_anim_4.png */; };
@@ -55,6 +59,13 @@
 		F508B5E6184E0BEB00946C41 /* JobDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
 		F508B5E7184E0BEB00946C41 /* JobDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
 		F508B5E8184E0BEB00946C41 /* JobDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailViewController.xib; sourceTree = "<group>"; };
+		F51B711A185732D00075FCD5 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		F51B711B185732D00075FCD5 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
+		F51B711D1857330C0075FCD5 /* SavedJobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedJobViewController.h; sourceTree = "<group>"; };
+		F51B711E1857330C0075FCD5 /* SavedJobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedJobViewController.m; sourceTree = "<group>"; };
+		F51B711F1857330C0075FCD5 /* SavedJobViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedJobViewController.xib; sourceTree = "<group>"; };
+		F51B7122185738200075FCD5 /* shortlist_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shortlist_unselected.png; sourceTree = "<group>"; };
+		F51B7123185738200075FCD5 /* shortlist_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shortlist_selected.png; sourceTree = "<group>"; };
 		F52012301851F866004F34AD /* iFindAJob.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFindAJob.xcdatamodel; sourceTree = "<group>"; };
 		F52012321851F924004F34AD /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		F52012331851F924004F34AD /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
@@ -84,8 +95,6 @@
 		F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDelegate.h; sourceTree = "<group>"; };
 		F58F6A30183CCB3D002F6678 /* LocationSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchService.h; sourceTree = "<group>"; };
 		F58F6A31183CCB3D002F6678 /* LocationSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchService.m; sourceTree = "<group>"; };
-		F593D38B184CB88700668841 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
-		F593D38C184CB88700668841 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		F593D398184CD8A600668841 /* JobListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobListingViewController.h; sourceTree = "<group>"; };
 		F593D399184CD8A600668841 /* JobListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobListingViewController.m; sourceTree = "<group>"; };
 		F593D39A184CD8A600668841 /* JobListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobListingViewController.xib; sourceTree = "<group>"; };
@@ -121,6 +130,8 @@
 		F506A4C1183B94FA006CE9FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F51B7122185738200075FCD5 /* shortlist_unselected.png */,
+				F51B7123185738200075FCD5 /* shortlist_selected.png */,
 				F59A5C6D184F75BD00638DD8 /* search_anim_4.png */,
 				F59A5C6E184F75BD00638DD8 /* search_anim_3.png */,
 				F59A5C6F184F75BD00638DD8 /* search_anim_2.png */,
@@ -209,6 +220,9 @@
 				F508B5E6184E0BEB00946C41 /* JobDetailViewController.h */,
 				F508B5E7184E0BEB00946C41 /* JobDetailViewController.m */,
 				F508B5E8184E0BEB00946C41 /* JobDetailViewController.xib */,
+				F51B711D1857330C0075FCD5 /* SavedJobViewController.h */,
+				F51B711E1857330C0075FCD5 /* SavedJobViewController.m */,
+				F51B711F1857330C0075FCD5 /* SavedJobViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -219,11 +233,11 @@
 				F506A4C1183B94FA006CE9FD /* Images */,
 				F55662BC183A5F33008FAA06 /* ExtraMethods.h */,
 				F55662BD183A5F33008FAA06 /* ExtraMethods.m */,
-				F593D38B184CB88700668841 /* Job.h */,
-				F593D38C184CB88700668841 /* Job.m */,
 				F520122F1851F866004F34AD /* iFindAJob.xcdatamodeld */,
 				F52012321851F924004F34AD /* Location.h */,
 				F52012331851F924004F34AD /* Location.m */,
+				F51B711A185732D00075FCD5 /* Job.h */,
+				F51B711B185732D00075FCD5 /* Job.m */,
 			);
 			name = Includes;
 			sourceTree = "<group>";
@@ -312,6 +326,9 @@
 				F59A5C72184F75BD00638DD8 /* search_anim_3.png in Resources */,
 				F59A5C73184F75BD00638DD8 /* search_anim_2.png in Resources */,
 				F59A5C74184F75BD00638DD8 /* search_anim_1.png in Resources */,
+				F51B71211857330C0075FCD5 /* SavedJobViewController.xib in Resources */,
+				F51B7124185738200075FCD5 /* shortlist_unselected.png in Resources */,
+				F51B7125185738200075FCD5 /* shortlist_selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,12 +345,13 @@
 				F55662B4183A5EFA008FAA06 /* SearchViewController.m in Sources */,
 				F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */,
 				F58F6A32183CCB3D002F6678 /* LocationSearchService.m in Sources */,
-				F593D38D184CB88700668841 /* Job.m in Sources */,
 				F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */,
 				F5B40996184CFC8300A5F0B3 /* JobSearchService.m in Sources */,
 				F508B5E9184E0BEB00946C41 /* JobDetailViewController.m in Sources */,
 				F52012311851F866004F34AD /* iFindAJob.xcdatamodeld in Sources */,
 				F52012341851F924004F34AD /* Location.m in Sources */,
+				F51B711C185732D00075FCD5 /* Job.m in Sources */,
+				F51B71201857330C0075FCD5 /* SavedJobViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

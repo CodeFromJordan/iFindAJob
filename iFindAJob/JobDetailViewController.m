@@ -10,6 +10,9 @@
 #import "ExtraMethods.h"
 #import <Social/Social.h>
 
+#import "Job.h"
+#import "AppDelegate.h"
+
 #import <QuartzCore/QuartzCore.h> 
 
 @interface JobDetailViewController ()
@@ -25,8 +28,13 @@
 @synthesize txtCommutingSwitch;
 @synthesize txtJobDescription;
 @synthesize btnOpenBrowser;
+@synthesize btnSaveJob;
 
 @synthesize job;
+@synthesize openedFromSavedJobs;
+
+// Used for core data
+@synthesize managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +49,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // Setup instance of app delegate for core data
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
     // Setup navigation bar
     // Setup button
@@ -88,11 +100,68 @@
     // Setup web opening button
     [btnOpenBrowser addTarget:self action:@selector(openURLInSafari:) forControlEvents:UIControlEventTouchUpInside];
     [btnOpenBrowser setTitleColor:[ExtraMethods getColorFromHexString:@"7D3A0A"] forState:UIControlStateNormal];
+    
+    // Setup save button
+    [btnSaveJob addTarget:self action:@selector(saveJobToPersistance:) forControlEvents:UIControlEventTouchUpInside];
+    [btnSaveJob setTitleColor:[ExtraMethods getColorFromHexString:@"7D3A0A"] forState:UIControlStateNormal];
+    
+    if(openedFromSavedJobs) // If the job was opened from the saved jobs list
+    {
+        [btnSaveJob setHidden:YES]; // Don't let user click save because job is already saved
+    }
 }
 
 - (IBAction)openURLInSafari:(UIButton *)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[job valueForKey:@"job_post_url"]]];
+}
+
+-(IBAction)saveJobToPersistance:(UIButton *)sender { // Save job details into data persistence
+    // Core data
+    if(![self isJobInDatabase:[job valueForKey:@"job_id"]])
+    {
+        // Create managed object
+        Job *jobToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Job" inManagedObjectContext:managedObjectContext];
+        
+        // Read values from job dictionary
+        [jobToSave setValue:[job valueForKey:@"job_id"] forKey:@"id"];
+        [jobToSave setValue:[job valueForKey:@"job_title"] forKey:@"title"];
+        [jobToSave setValue:[job valueForKey:@"job_company_name"] forKey:@"company_name"];
+        [jobToSave setValue:[job valueForKey:@"job_post_date"] forKey:@"post_date"];
+        [jobToSave setValue:[job valueForKey:@"job_has_relocation_assistance"] forKey:@"relocation_assistance"];
+        [jobToSave setValue:[job valueForKey:@"job_requires_telecommuting"] forKey:@"requires_commuting"];
+        [jobToSave setValue:[job valueForKey:@"job_description"] forKey:@"j_description"];
+        [jobToSave setValue:[job valueForKey:@"job_post_url"] forKey:@"url"];
+    
+        // Save/error handling
+        NSError *saveError; // Error for save operation
+        if(![managedObjectContext save:&saveError]) {
+            NSLog(@"Failed to save record: %@", [saveError localizedDescription]);
+    }
+    }
+}
+
+-(bool)isJobInDatabase:(NSString *)idOfJobToCheckExists { // Checks if a job exists in database
+    // Core data
+    // Setup fetch request and entity objects
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Job" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *getJobQuery = [NSPredicate predicateWithFormat:@"id == %@", idOfJobToCheckExists]; // Must match location AND keyword
+    [fetchRequest setPredicate:getJobQuery]; // Query match predicate
+    
+    NSError *fetchError; // Save for fetch operation
+    NSArray *fetchedJobs = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    
+    if([fetchedJobs count] == 1) // If the number of jobs in the database that match query = 1
+    {
+        return YES; // Job exists
+    }
+    else // Else
+    {
+        return NO; // Job doesn't exist
+    }
 }
 
 - (IBAction)postJobToSocial:(UIButton *)sender

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import "SearchViewController.h"
+#import "SavedJobViewController.h"
 #import "ExtraMethods.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

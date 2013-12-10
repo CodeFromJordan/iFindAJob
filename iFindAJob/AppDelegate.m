@@ -24,20 +24,29 @@
     // Override point for customization after application launch.
     // Begin custom code --
     // Navigation controllers --
+    
+    // Main
     MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     UINavigationController *mainNC = [[UINavigationController alloc] initWithRootViewController:mainVC];
     [mainVC setTitle:@"Home"]; // Navigation bar title
     [mainNC setTitle:@"Home"]; // Tab bar title
     [mainNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"home_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home_unselected.png"]];
     
-    
+    // Search
     SearchViewController *searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     UINavigationController *searchNC = [[UINavigationController alloc] initWithRootViewController:searchVC];
     [searchVC setTitle:@"Jobs In.."]; // Navigation bar title
     [searchNC setTitle:@"Find Jobs"]; // Tab bar title
     [searchNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"search_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"search_unselected.png"]];
     
-    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, nil];
+    // Saved
+    SavedJobViewController *savedjobVC = [[SavedJobViewController alloc] initWithNibName:@"SavedJobViewController" bundle:nil];
+    UINavigationController *savedjobNC = [[UINavigationController alloc] initWithRootViewController:savedjobVC];
+    [savedjobVC setTitle:@"Saved Jobs"]; // Navigation bar title
+    [savedjobNC setTitle:@"Saved Jobs"]; // Tab bar title
+    [savedjobNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"shortlist_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"shortlist_unselected.png"]];
+    
+    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, savedjobNC, nil];
     
     // Tab controller
     self.tabController = [[UITabBarController alloc] init];

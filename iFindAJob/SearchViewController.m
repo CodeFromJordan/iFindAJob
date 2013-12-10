@@ -9,7 +9,7 @@
 #import "SearchViewController.h"
 #import "JobListingViewController.h"
 #import "ExtraMethods.h"
-
+#import "LocationSearchService.h"
 #import "Location.h"
 #import "AppDelegate.h"
 
@@ -77,7 +77,7 @@
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"job_count" ascending:YES];
     [locations sortUsingDescriptors:[NSArray arrayWithObjects:descriptor, nil]];
     
-    [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
+    [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]]; // Put edit button on navigation bar
     
     // Begin appearance --
     [self.navigationController.navigationBar setTintColor:[ExtraMethods getColorFromHexString:@"7D3A0A"]]; // Make navigation bar brown
@@ -247,7 +247,7 @@
     {
         [animationImageView stopAnimating]; // Force animation to go away
         [[cell textLabel] setText:[location valueForKey:@"job_location"]]; // Populate cells with search results
-        [[cell detailTextLabel] setText:@""]; // Clear detail text label
+        [[cell detailTextLabel] setText:[NSString stringWithFormat:@"Reported Jobs: %@", [location valueForKey:@"job_count"]]]; // Clear detail text label
     }
     else
     {
@@ -356,10 +356,10 @@
     [fetchRequest setPredicate:deleteQuery]; // Query match predicate
     
     NSError *fetchError; // Save for fetch operation
-    NSArray *fetchedProducts = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    NSArray *fetchedLocations = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
 
-    for (NSManagedObject *product in fetchedProducts) { // Loop through each matched object and delete it
-        [managedObjectContext deleteObject:product];
+    for (NSManagedObject *location in fetchedLocations) { // Loop through each matched object and delete it
+        [managedObjectContext deleteObject:location];
     }
     
     // Save/error handling

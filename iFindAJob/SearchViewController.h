@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "ServiceDelegate.h"
-#import "LocationSearchService.h"
-#import "ExtraMethods.h"
 
 @interface SearchViewController : UITableViewController <UISearchBarDelegate, ServiceDelegate> {
     BOOL isSearching;

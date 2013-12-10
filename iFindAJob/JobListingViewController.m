@@ -125,7 +125,7 @@
     NSString *job_post_date = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_post_date"]]; // Returns date and time
         job_post_date = [job_post_date substringToIndex:10]; // Cut time from string
     
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"by %@ on %@", job_company_name, job_post_date]] ;
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"by %@ on %@", job_company_name, job_post_date]];
     
     // Cell text formatting
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
@@ -184,6 +184,7 @@
     [jobDetailVC setTitle:@"Job Details"]; // Navigation bar title
     
     [jobDetailVC setJob:job];
+    [jobDetailVC setOpenedFromSavedJobs:NO];
     
     [[self navigationController] pushViewController:jobDetailVC animated:YES];
 }
