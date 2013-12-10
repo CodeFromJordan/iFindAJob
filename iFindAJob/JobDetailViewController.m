@@ -112,6 +112,12 @@
     [btnSaveJob addTarget:self action:@selector(saveJobToPersistance:) forControlEvents:UIControlEventTouchUpInside];
     [btnSaveJob setTitleColor:[ExtraMethods getColorFromHexString:@"7D3A0A"] forState:UIControlStateNormal];
     
+    // Map image formatting
+    imgJobMap = [imgJobMap init];
+    [[imgJobMap layer] setBorderColor:[[UIColor brownColor] CGColor]];
+    [[imgJobMap layer] setBorderWidth:1];
+    [imgJobMap setImage:[UIImage imageNamed:@"mapplaceholder.png"]]; // Set placeholder image
+    
     // Download map image
     MapDownloadService *service = [[MapDownloadService alloc] init];
     [service setCityName:[job valueForKey:@"job_city"]];
@@ -125,13 +131,8 @@
 }
 
 - (void)serviceFinished:(id)service withError:(BOOL)error forSearchTerm:(NSString*)searchTerm {
-    // Set map image
-    imgJobMap = [imgJobMap init];                 
+    // Reset map image to actual map
     [imgJobMap setImage:[service mapImage]];
-    
-    // Map image formatting
-    [[imgJobMap layer] setBorderColor:[[UIColor brownColor] CGColor]];
-    [[imgJobMap layer] setBorderWidth:1];
 }
 
 - (IBAction)openURLInSafari:(UIButton *)sender
