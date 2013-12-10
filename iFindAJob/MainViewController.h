@@ -10,7 +10,8 @@
 
 @interface MainViewController : UIViewController
 {
-    UIBarButtonItem* shareButton;
+    UIBarButtonItem* twitterButton;
+    UIBarButtonItem* facebookButton;
 }
 
 @end

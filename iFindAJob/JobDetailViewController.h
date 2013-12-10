@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface JobDetailViewController : UIViewController {
-        UIBarButtonItem* shareButton;
+    UIBarButtonItem* twitterButton;
+    UIBarButtonItem* facebookButton;
 }
 @property (weak, nonatomic) IBOutlet UILabel *txtJobTitle;
 @property (weak, nonatomic) IBOutlet UILabel *txtJobCompany;
