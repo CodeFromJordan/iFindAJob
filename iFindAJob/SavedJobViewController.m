@@ -83,7 +83,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     NSDictionary *job = [savedJobs objectAtIndex:[indexPath row]];
@@ -94,7 +94,7 @@
     NSString *job_post_date = [NSString stringWithFormat:@"%@", [job valueForKey:@"job_post_date"]]; // Returns date and time
     job_post_date = [job_post_date substringToIndex:10]; // Cut time from string
     
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"by %@ on %@", job_company_name, job_post_date]] ;
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"posted by %@ on %@", job_company_name, job_post_date]] ;
     
     // Cell text formatting
     cell.textLabel.textColor = [ExtraMethods getColorFromHexString:@"7D3A0A"];
@@ -204,7 +204,7 @@
     NSDictionary *job = [savedJobs objectAtIndex:[indexPath row]];
     
     JobDetailViewController *jobDetailVC = [[JobDetailViewController alloc] initWithNibName:@"JobDetailViewController" bundle:nil];
-    [jobDetailVC setTitle:@"Job Details"]; // Navigation bar title
+    [jobDetailVC setTitle:@"Saved Job"]; // Navigation bar title
     
     [jobDetailVC setJob:job];
     [jobDetailVC setOpenedFromSavedJobs:YES];
