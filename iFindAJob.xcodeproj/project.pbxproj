@@ -26,9 +26,6 @@
 		F5566295183A5E1A008FAA06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5566293183A5E1A008FAA06 /* InfoPlist.strings */; };
 		F5566297183A5E1A008FAA06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5566296183A5E1A008FAA06 /* main.m */; };
 		F556629B183A5E1A008FAA06 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F556629A183A5E1A008FAA06 /* AppDelegate.m */; };
-		F556629D183A5E1A008FAA06 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F556629C183A5E1A008FAA06 /* Default.png */; };
-		F556629F183A5E1A008FAA06 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F556629E183A5E1A008FAA06 /* Default@2x.png */; };
-		F55662A1183A5E1A008FAA06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F55662A0183A5E1A008FAA06 /* Default-568h@2x.png */; };
 		F55662A8183A5E6D008FAA06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55662A7183A5E6D008FAA06 /* CoreData.framework */; };
 		F55662AA183A5E75008FAA06 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55662A9183A5E75008FAA06 /* Social.framework */; };
 		F55662AF183A5EDD008FAA06 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662AD183A5EDD008FAA06 /* MainViewController.m */; };
@@ -37,7 +34,10 @@
 		F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55662B3183A5EFA008FAA06 /* SearchViewController.xib */; };
 		F55662BE183A5F33008FAA06 /* ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55662BD183A5F33008FAA06 /* ExtraMethods.m */; };
 		F58613FA185773630072D956 /* MapDownloadService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58613F9185773630072D956 /* MapDownloadService.m */; };
-		F58613FC18578DB50072D956 /* mapplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F58613FB18578DB50072D956 /* mapplaceholder.png */; };
+		F5861400185790210072D956 /* mapplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F58613FF185790210072D956 /* mapplaceholder.png */; };
+		F5861402185790760072D956 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5861401185790760072D956 /* Default.png */; };
+		F5861404185790790072D956 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5861403185790790072D956 /* Default@2x.png */; };
+		F58614061857907C0072D956 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F58614051857907C0072D956 /* Default-568h@2x.png */; };
 		F58F6A32183CCB3D002F6678 /* LocationSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F58F6A31183CCB3D002F6678 /* LocationSearchService.m */; };
 		F593D39B184CD8A600668841 /* JobListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F593D399184CD8A600668841 /* JobListingViewController.m */; };
 		F593D39C184CD8A600668841 /* JobListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F593D39A184CD8A600668841 /* JobListingViewController.xib */; };
@@ -48,9 +48,6 @@
 		F5B40996184CFC8300A5F0B3 /* JobSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B40995184CFC8300A5F0B3 /* JobSearchService.m */; };
 		F5D14322184E3DD600E9AD09 /* iconregular.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431F184E34D500E9AD09 /* iconregular.png */; };
 		F5D14323184E3DDC00E9AD09 /* iconretina.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431D184E34D200E9AD09 /* iconretina.png */; };
-		F5D14324184E3DE000E9AD09 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D14317184E31DE00E9AD09 /* Default.png */; };
-		F5D14325184E3DE400E9AD09 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D14319184E326200E9AD09 /* Default@2x.png */; };
-		F5D14326184E3DE600E9AD09 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1431B184E326400E9AD09 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,7 +93,10 @@
 		F55662BD183A5F33008FAA06 /* ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraMethods.m; sourceTree = "<group>"; };
 		F58613F8185773630072D956 /* MapDownloadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDownloadService.h; sourceTree = "<group>"; };
 		F58613F9185773630072D956 /* MapDownloadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDownloadService.m; sourceTree = "<group>"; };
-		F58613FB18578DB50072D956 /* mapplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapplaceholder.png; path = ../../mapplaceholder.png; sourceTree = "<group>"; };
+		F58613FF185790210072D956 /* mapplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapplaceholder.png; sourceTree = "<group>"; };
+		F5861401185790760072D956 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F5861403185790790072D956 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F58614051857907C0072D956 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F58F6A2D183CCAB9002F6678 /* ServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDelegate.h; sourceTree = "<group>"; };
 		F58F6A30183CCB3D002F6678 /* LocationSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchService.h; sourceTree = "<group>"; };
 		F58F6A31183CCB3D002F6678 /* LocationSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchService.m; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		F506A4C1183B94FA006CE9FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F58613FB18578DB50072D956 /* mapplaceholder.png */,
+				F58613FF185790210072D956 /* mapplaceholder.png */,
 				F51B7122185738200075FCD5 /* shortlist_unselected.png */,
 				F51B7123185738200075FCD5 /* shortlist_selected.png */,
 				F59A5C6D184F75BD00638DD8 /* search_anim_4.png */,
@@ -158,6 +158,9 @@
 		F556627E183A5E1A008FAA06 = {
 			isa = PBXGroup;
 			children = (
+				F58614051857907C0072D956 /* Default-568h@2x.png */,
+				F5861403185790790072D956 /* Default@2x.png */,
+				F5861401185790760072D956 /* Default.png */,
 				F5566290183A5E1A008FAA06 /* iFindAJob */,
 				F5566289183A5E1A008FAA06 /* Frameworks */,
 				F5566288183A5E1A008FAA06 /* Products */,
@@ -314,9 +317,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5566295183A5E1A008FAA06 /* InfoPlist.strings in Resources */,
-				F556629D183A5E1A008FAA06 /* Default.png in Resources */,
-				F556629F183A5E1A008FAA06 /* Default@2x.png in Resources */,
-				F55662A1183A5E1A008FAA06 /* Default-568h@2x.png in Resources */,
 				F55662B0183A5EDD008FAA06 /* MainViewController.xib in Resources */,
 				F55662B5183A5EFA008FAA06 /* SearchViewController.xib in Resources */,
 				F506A4CA183B9CB3006CE9FD /* search_selected.png in Resources */,
@@ -327,9 +327,6 @@
 				F508B5EA184E0BEB00946C41 /* JobDetailViewController.xib in Resources */,
 				F5D14322184E3DD600E9AD09 /* iconregular.png in Resources */,
 				F5D14323184E3DDC00E9AD09 /* iconretina.png in Resources */,
-				F5D14324184E3DE000E9AD09 /* Default.png in Resources */,
-				F5D14325184E3DE400E9AD09 /* Default@2x.png in Resources */,
-				F5D14326184E3DE600E9AD09 /* Default-568h@2x.png in Resources */,
 				F59A5C71184F75BD00638DD8 /* search_anim_4.png in Resources */,
 				F59A5C72184F75BD00638DD8 /* search_anim_3.png in Resources */,
 				F59A5C73184F75BD00638DD8 /* search_anim_2.png in Resources */,
@@ -337,7 +334,10 @@
 				F51B71211857330C0075FCD5 /* SavedJobViewController.xib in Resources */,
 				F51B7124185738200075FCD5 /* shortlist_unselected.png in Resources */,
 				F51B7125185738200075FCD5 /* shortlist_selected.png in Resources */,
-				F58613FC18578DB50072D956 /* mapplaceholder.png in Resources */,
+				F5861400185790210072D956 /* mapplaceholder.png in Resources */,
+				F5861402185790760072D956 /* Default.png in Resources */,
+				F5861404185790790072D956 /* Default@2x.png in Resources */,
+				F58614061857907C0072D956 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
