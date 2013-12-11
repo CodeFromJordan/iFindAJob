@@ -11,4 +11,5 @@
 @interface ExtraMethods : NSObject
 +(UIColor*)getColorFromHexString:(NSString*)hex;
 +(void)showErrorMessageWithTitle:(NSString*)title andMessage:(NSString*)message;
++(BOOL) connectedToInternet;
 @end

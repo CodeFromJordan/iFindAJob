@@ -90,7 +90,7 @@
     } else { // Serious error, show error message
         [searchResults removeAllObjects];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alertView show];
+        [alertView performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
         [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     }
 }

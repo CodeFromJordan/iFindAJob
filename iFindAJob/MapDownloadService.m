@@ -20,7 +20,7 @@
     
     // Build URL
     NSString *cityNameEscaped = [cityName stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/staticmap?center=%@&zoom=11&size=120x93&sensor=false", cityNameEscaped]];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/staticmap?center=%@&zoom=11&size=90x90&sensor=false", cityNameEscaped]];
     
     NSData *data = [[NSData alloc] initWithContentsOfURL:URL]; // Get data
     

@@ -17,7 +17,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+{  
     // Required core --
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -46,7 +46,18 @@
     [savedjobNC setTitle:@"Saved Jobs"]; // Tab bar title
     [savedjobNC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"shortlist_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"shortlist_unselected.png"]];
     
-    NSArray *allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, savedjobNC, nil];
+    NSArray *allViewControllers;
+    
+    if([ExtraMethods connectedToInternet] == NO) // If no internet connection
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"You do not have an internet connection. Not all app features will be available." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+        allViewControllers = [[NSArray alloc] initWithObjects: mainNC, savedjobNC, nil]; // Only main and saved views
+    }
+    else // If internet connection
+    {
+        allViewControllers = [[NSArray alloc] initWithObjects: mainNC, searchNC, savedjobNC, nil]; // All views
+    }
     
     // Tab controller
     self.tabController = [[UITabBarController alloc] init];

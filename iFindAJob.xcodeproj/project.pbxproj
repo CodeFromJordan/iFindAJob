@@ -103,6 +103,7 @@
 		F593D398184CD8A600668841 /* JobListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobListingViewController.h; sourceTree = "<group>"; };
 		F593D399184CD8A600668841 /* JobListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobListingViewController.m; sourceTree = "<group>"; };
 		F593D39A184CD8A600668841 /* JobListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobListingViewController.xib; sourceTree = "<group>"; };
+		F59622131858D2EE001467E3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F59A5C6D184F75BD00638DD8 /* search_anim_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_anim_4.png; sourceTree = "<group>"; };
 		F59A5C6E184F75BD00638DD8 /* search_anim_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_anim_3.png; sourceTree = "<group>"; };
 		F59A5C6F184F75BD00638DD8 /* search_anim_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_anim_2.png; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		F556627E183A5E1A008FAA06 = {
 			isa = PBXGroup;
 			children = (
+				F59622131858D2EE001467E3 /* CoreTelephony.framework */,
 				F58614051857907C0072D956 /* Default-568h@2x.png */,
 				F5861403185790790072D956 /* Default@2x.png */,
 				F5861401185790760072D956 /* Default.png */,

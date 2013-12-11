@@ -13,7 +13,6 @@
 #import "Location.h"
 #import "AppDelegate.h"
 
-
 @interface SearchViewController ()
 
 @end
@@ -38,7 +37,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+          
     // Setup instance of app delegate for core data
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
@@ -178,18 +177,23 @@
         // If there are no results found
         if ([searchResults count] == 0) {
             [animationImageView stopAnimating]; // Force animation to go away
+            [searchBar setUserInteractionEnabled:YES]; // Enable search bar to allow searches/text changes
             [searchBar setText:[NSString stringWithFormat:@"No results for '%@'..", searchTerm]];
         }
         else{
+            [searchBar setUserInteractionEnabled:YES]; // Enable search bar to allow searches/text changes
             [searchBar setText:[NSString stringWithFormat:@"'%@' jobs found in these locations..", searchTerm]];
         }
 
         [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } else { // Serious error, show error message
+        [searchBar setUserInteractionEnabled:YES]; // Enable search bar to allow searches/text changes
+        [searchBar setText:@"Error"];
         [searchResults removeAllObjects];
         [animationImageView stopAnimating]; // Force animation to go away
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a serious error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alertView show];
+        [alertView performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+        [animationImageView stopAnimating]; // Force animation to go away
         [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     }
 }
@@ -204,8 +208,10 @@
     [service setDelegate:self];
     [serviceQueue addOperation:service];
     
+    
     [searchResults removeAllObjects];
     [searchBar setText:[NSString stringWithFormat:@"Searching for '%@'..", searchTerm]];
+    [searchBar setUserInteractionEnabled:NO]; // Disable search bar to stop cancel button crash
     [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     
     // Hide the Keyboard from the searchBar

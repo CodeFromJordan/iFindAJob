@@ -50,4 +50,10 @@
     [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
 }
 
++(BOOL)connectedToInternet
+{
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    return ( URLString != NULL ) ? YES : NO;
+}
+
 @end
