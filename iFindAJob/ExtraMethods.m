@@ -52,7 +52,7 @@
 
 +(BOOL)connectedToInternet
 {
-    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSASCIIStringEncoding error:nil];
     return ( URLString != NULL ) ? YES : NO;
 }
 
